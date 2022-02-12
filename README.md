@@ -1,12 +1,9 @@
 Em GO
 
-
 := is a short variable declaration, basicamente faz a operação de declaração e atribuição
 
 
-
-
-Para criar váriaveis com package scope, devemos usar o var exemplo:
+Para criar váriaveis com package scope, não podemos usar o short operator, sobrando assim o var ou o const.
 
 package main
 
@@ -38,3 +35,12 @@ No Go, boolean == bool
 
 statement -> uma ou mais expressões
 expressão -> qualquer coisa que produz um resultado
+
+
+variaveis dentro de um code block sao restritas ao codeblock ORIGINAAAAL
+variaveis podem ser declaradas no escopo de package (não me parece boa ideia a não ser que sejam constantes)
+
+o var funciona em qualquer lugar.
+
+
+Boas praticas do GO, sempre utilizar :=, a menos que não de, ai usa outras paradas
