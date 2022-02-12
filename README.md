@@ -5,7 +5,7 @@ Em GO
 
 Para criar váriaveis com package scope, não podemos usar o short operator, sobrando assim o var ou o const.
 
-```package main
+ ``` package main
 
 import "fmt"
 
@@ -14,7 +14,7 @@ var teste = "uma string qualquer"
 func main() {
     teste = "outra string"
     fmt.Println(teste)    
-} ```
+}  ``` 
 
 
 Ela pode ser mudada pelas funções, qualquer uma no mesmo package (não sei se consigo mudar em packages diferentes)
@@ -23,13 +23,13 @@ Ela pode ser mudada pelas funções, qualquer uma no mesmo package (não sei se 
 O short variable declaration pode ser usado se ao menos uma variavel na mesma linha seja declarada, apesar de ser muito feio.
 ex:
 
-```func main() {
+ ``` func main() {
     x := 10
     fmt.Println(x)
     x, z := 11, "teste"
 
 }
-```
+ ``` 
 
 No Go, boolean == bool
 
@@ -52,26 +52,26 @@ TIPOS
 Tipo em go são estaticos (tipado)
 se eu declarar a seguinte variavel em um code block
 
-```x := 10```
+ ``` x := 10 ``` 
 Ela é do tipo int, não posso colocar uma string nela, pq da erro
 Go é uma linguagem de tipagem estatica
 
 Para fazer uma declaração com o tipo, é da seguinte forma
 
-```var x int;```
+ ``` var x int; ``` 
 
 palavra reservada var, nome da variavel, tipo
 Ao ser declarada da forma do exemplo acima, ela é iniciada com 0.
 
 O tipo geralmente é deduzido pelo compilador, mas pode ser declarado pelo dev, como nos exemplos
 
-```var x string = "teste1";
-y := 10.2```
+ ``` var x string = "teste1";
+y := 10.2 ``` 
 
 Ao rodar o seguinte comando
 
-```fmt.Printf("valor: %v tipo: %T", x, x)
-fmt.Printf("valor: %v tipo: %T", y, y)```
+ ``` fmt.Printf("valor: %v tipo: %T", x, x)
+fmt.Printf("valor: %v tipo: %T", y, y) ``` 
 
 o resultado será
 
@@ -83,7 +83,7 @@ Se a variavel for declarada em package scope, só podemos inserir um valor nela 
 
 exemplo
 
-```package main
+ ``` package main
 
 import "fmt"
 
@@ -92,12 +92,12 @@ var test int
 func main() {
 	test = 10
 	fmt.Println(test)
-}```
+} ``` 
 
 se eu tentar atribuir valor a variavel a nivel de package, da o seguinte erro 
 
-```./prog.go:8:1: syntax error: non-declaration statement outside function body
-```
+ ``` ./prog.go:8:1: syntax error: non-declaration statement outside function body
+ ``` 
 
 Tipos de dados primitivo:
 - int
