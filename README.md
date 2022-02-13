@@ -217,3 +217,35 @@ E também, print, somente printa na tela
 println, coloca um new line depois do que foi printado
 printf, permite formar o print com algumas coringas
 
+Como criar meu proprio tipo
+
+tipos são imutaveis
+
+Seguindo o exemplo
+
+
+```go
+
+package main
+
+import "fmt"
+
+type hotdog int
+
+var b hotdog
+
+func main() {
+
+	fmt.Printf("%v, %T\n", b, b)
+}
+
+
+```
+
+o resultado será 0, main.hotdog
+
+Esse hotdog é meu tipo, que tem um tipo subjacente, que vem por trás como base
+
+Quando criamos nossos proprios tipos, podemos trabalhar com eles de forma que com os tipos primitivos nós não conseguimos.
+
+Apesar de hotdog nesse exemplo tenha o tipo subjacente como int, nós não podemos atribuir um int a ele
