@@ -2,19 +2,21 @@ Em GO
 
 := is a short variable declaration, basicamente faz a operação de declaração e atribuição
 
-
 Para criar váriaveis com package scope, não podemos usar o short operator, sobrando assim o var ou o const.
 
- ``` package main
+```go
+package main
 
 import "fmt"
 
 var teste = "uma string qualquer"
 
 func main() {
-    teste = "outra string"
-    fmt.Println(teste)    
-}  ``` 
+   teste = "outra string"
+   fmt.Println(teste)
+}  
+
+```
 
 
 Ela pode ser mudada pelas funções, qualquer uma no mesmo package (não sei se consigo mudar em packages diferentes)
@@ -23,67 +25,75 @@ Ela pode ser mudada pelas funções, qualquer uma no mesmo package (não sei se 
 O short variable declaration pode ser usado se ao menos uma variavel na mesma linha seja declarada, apesar de ser muito feio.
 ex:
 
- ``` func main() {
-    x := 10
-    fmt.Println(x)
-    x, z := 11, "teste"
+```go
+
+func main() {
+   x := 10
+   fmt.Println(x)
+   x, z := 11, "teste"
 
 }
- ``` 
+
+```
 
 No Go, boolean == bool
 
 statement -> uma ou mais expressões
 expressão -> qualquer coisa que produz um resultado
 
-
 variaveis dentro de um code block sao restritas ao codeblock ORIGINAAAAL
 variaveis podem ser declaradas no escopo de package (não me parece boa ideia a não ser que sejam constantes)
 
 o var funciona em qualquer lugar.
 
-
 Boas praticas do GO, sempre utilizar :=, a menos que não de, ai usa outras paradas
-
-
 
 TIPOS
 
 Tipo em go são estaticos (tipado)
 se eu declarar a seguinte variavel em um code block
 
- ``` x := 10 ``` 
+`x := 10`
+
 Ela é do tipo int, não posso colocar uma string nela, pq da erro
 Go é uma linguagem de tipagem estatica
 
 Para fazer uma declaração com o tipo, é da seguinte forma
 
- ``` var x int; ``` 
+`var x int;`
 
 palavra reservada var, nome da variavel, tipo
 Ao ser declarada da forma do exemplo acima, ela é iniciada com 0.
 
 O tipo geralmente é deduzido pelo compilador, mas pode ser declarado pelo dev, como nos exemplos
 
- ``` var x string = "teste1";
-y := 10.2 ``` 
+```go
+
+var x string = "teste1";
+y := 10.2
+
+```
 
 Ao rodar o seguinte comando
 
- ``` fmt.Printf("valor: %v tipo: %T", x, x)
-fmt.Printf("valor: %v tipo: %T", y, y) ``` 
+```go
+
+fmt.Printf("valor: %v tipo: %T", x, x)
+fmt.Printf("valor: %v tipo: %T", y, y)
+
+```
 
 o resultado será
 
 valor: teste1 tipo: string
 valor: teste2 tipo: float64
 
-
 Se a variavel for declarada em package scope, só podemos inserir um valor nela em codeblock
 
 exemplo
 
- ``` package main
+```go
+ package main
 
 import "fmt"
 
@@ -92,27 +102,32 @@ var test int
 func main() {
 	test = 10
 	fmt.Println(test)
-} ``` 
+}
 
-se eu tentar atribuir valor a variavel a nivel de package, da o seguinte erro 
+```
 
- ``` ./prog.go:8:1: syntax error: non-declaration statement outside function body
- ``` 
+se eu tentar atribuir valor a variavel a nivel de package, da o seguinte erro
+
+```
+
+./prog.go:8:1: syntax error: non-declaration statement outside function body
+
+```
 
 Tipos de dados primitivo:
+
 - int
 - string
 - bool
 
 Tipos de dados compostos: (tipos feitos pelo dev, compostos de tipos primitivos)
+
 - slice
 - array
 - struct
 - map
 
-
 O ato de definir, criar, estruturar tipo compostos chama-se composição.
-
 
 VALOR ZERO
 
@@ -137,7 +152,6 @@ use var para package-level scope
 
 Com tipos primitivos, segue exemplo:
 
-
 ```go
 
 package main
@@ -160,11 +174,14 @@ func main() {
 
 resultado
 
-```0, int
-0, float64
-, string 
-false, bool```
+```
 
+0, int
+0, float64
+, string
+false, bool
+
+```
 
 Pacote fmt
 
@@ -178,15 +195,15 @@ em ciencia de computação, um literal é uma notação para representar um valo
 
 Ou seja, um int, um bool, um string são literals
 
- interpreted string literal
+interpreted string literal
 
- x := "oi, bom dia\nComo vai? \t espero que tudo bem"
+x := "oi, bom dia\nComo vai? \t espero que tudo bem"
 
- Essa é uma string interpretada, por exemplo, onde o go acha o \n, ele não mostra um \n, e sim interpretar como uma quebra de linha
+Essa é uma string interpretada, por exemplo, onde o go acha o \n, ele não mostra um \n, e sim interpretar como uma quebra de linha
 
 raw string literals
 
-x :=  `Oi, bom dia \n`
+x := `Oi, bom dia \n`
 
 Nesse caso, como é um raw string literal, o go vai printar o \n
 
@@ -211,7 +228,7 @@ resultado:
 
 oibom dia
 
-Fprint ->  É um file print, não necessáriamente um arquivo, pq em go não tem diferença entre colocar bytes em um arquivo ou uma conexão ao servidor, é tudo um writer interface, qualquer coisa que tenha como entrada um writer, pode-se usar o Fprint
+Fprint -> É um file print, não necessáriamente um arquivo, pq em go não tem diferença entre colocar bytes em um arquivo ou uma conexão ao servidor, é tudo um writer interface, qualquer coisa que tenha como entrada um writer, pode-se usar o Fprint
 
 E também, print, somente printa na tela
 println, coloca um new line depois do que foi printado
@@ -222,7 +239,6 @@ Como criar meu proprio tipo
 tipos são imutaveis
 
 Seguindo o exemplo
-
 
 ```go
 
