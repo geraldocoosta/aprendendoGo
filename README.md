@@ -165,3 +165,55 @@ resultado
 , string 
 false, bool```
 
+
+Pacote fmt
+
+Print
+Printf
+Println
+
+mas antes, sobre string, existem dois tipos de string que podem ser declaradas, interpreted string literals e raw string literals
+
+em ciencia de computação, um literal é uma notação para representar um valor fixo no código fonte
+
+Ou seja, um int, um bool, um string são literals
+
+ interpreted string literal
+
+ x := "oi, bom dia\nComo vai? \t espero que tudo bem"
+
+ Essa é uma string interpretada, por exemplo, onde o go acha o \n, ele não mostra um \n, e sim interpretar como uma quebra de linha
+
+raw string literals
+
+x :=  `Oi, bom dia \n`
+
+Nesse caso, como é um raw string literal, o go vai printar o \n
+
+Nada vai ser interpretado, podendo incluir new lines com enter, e assim vai, parece o do javascript
+
+Cada caractere da string é chamado de rune literal.
+
+Agra, voltando para o pacote fmt, são usados principalmente 3 categorias de print
+
+Print -> printa na tela, retorna o numero de bytes trabalho e se ocorreu algum erro
+Sprint -> retorna string e não coloca nada na tela, ele somente retorna o que coloquei dentro dele. Só coloca espaço quando nenhum dos valores é um string.
+Esse S na frente de print vem de stream.
+ex:
+
+x := "oi"
+y := "bom dia"
+
+z := fmt.Sprint(x, y)
+fmt.Println(z);
+
+resultado:
+
+oibom dia
+
+Fprint ->  É um file print, não necessáriamente um arquivo, pq em go não tem diferença entre colocar bytes em um arquivo ou uma conexão ao servidor, é tudo um writer interface, qualquer coisa que tenha como entrada um writer, pode-se usar o Fprint
+
+E também, print, somente printa na tela
+println, coloca um new line depois do que foi printado
+printf, permite formar o print com algumas coringas
+
