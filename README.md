@@ -197,13 +197,19 @@ Ou seja, um int, um bool, um string são literals
 
 interpreted string literal
 
+```go
 x := "oi, bom dia\nComo vai? \t espero que tudo bem"
+```
 
 Essa é uma string interpretada, por exemplo, onde o go acha o \n, ele não mostra um \n, e sim interpretar como uma quebra de linha
 
 raw string literals
 
-x := \`Oi, bom dia \n\`
+```go
+
+x := `Oi, bom dia \n`
+
+```
 
 Nesse caso, como é um raw string literal, o go vai printar o \n
 
