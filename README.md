@@ -112,3 +112,53 @@ Tipos de dados compostos: (tipos feitos pelo dev, compostos de tipos primitivos)
 
 
 O ato de definir, criar, estruturar tipo compostos chama-se composição.
+
+
+VALOR ZERO
+
+declaração -> em analogia, é como comprar uma caixa postal
+inicialização -> receber a primeira carta na caixa postal
+atribuição -> na analogia, é como receber outro valor na caixa postal
+
+O short variable declaration faz os 3 juntos
+
+valor zero é o valor que se encontra presente em uma váriavel antes de ela ser inicializada pelo dev
+
+valores zeros no go
+
+int: 0
+floats: 0.0
+bool: false
+strings: ""
+pointer, funcions, interfaces, slices, channels, maps : nil
+
+user o := sempre que possivel
+use var para package-level scope
+
+Com tipos primitivos, segue exemplo:
+
+
+```go
+
+package main
+
+import "fmt"
+
+var a int
+var b float64
+var c string
+
+func main() {
+	fmt.Printf("%v, %T\n", a, a)
+	fmt.Printf("%v, %T\n", b, b)
+	fmt.Printf("%v, %T\n", c, c)
+}
+
+```
+
+resultado
+
+```0, int
+0, float64
+, string```
+
