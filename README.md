@@ -203,7 +203,7 @@ Essa é uma string interpretada, por exemplo, onde o go acha o \n, ele não most
 
 raw string literals
 
-x := `Oi, bom dia \n`
+x := \`Oi, bom dia \n\`
 
 Nesse caso, como é um raw string literal, o go vai printar o \n
 
