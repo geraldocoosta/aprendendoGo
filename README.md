@@ -319,7 +319,7 @@ func main() {
 	fmt.Println(x) // zero value == false
 	x = true
 	fmt.Println(x) // atribuindo valor 
-	x = (10 < 100) // bool como resultado de operadores ralacionais
+	x = 10 < 100 // bool como resultado de operadores ralacionais
 	fmt.Println(x)
 }
 ```
