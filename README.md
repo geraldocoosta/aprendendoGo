@@ -323,3 +323,32 @@ func main() {
 	fmt.Println(x)
 }
 ```
+
+Cap 4 aula 2 -> Como os computadores funcionam
+
+Computadores digitais funcionam com eletrecidade e podem estar ligados ou desligados
+estremas de codificação:
+	Com 1 lampada na varanda, que pode estar ligada ou desligada, podemos ter 2 
+	mensagens. 
+	Com 2 lampadas, 4 mensagens
+	Com 3 lampadas, 8 mensagens
+
+	A formula, é sempre 2 elevado a n
+
+Sabendo disso, podemos ter um esquema de codificação, atribuindo significado a cada uma
+dessas mensagens
+	2 lampadas
+	on 		on	-> festa
+	off 	off -> a mimir
+
+esses on off, podem ser substituidos por uns e zeros, e serem chamados de BInary digiTS
+bits   =)
+
+Quantificando bits
+1 bit
+8 bits -> 1 byte
+1024 bytes -> 1 kb
+1024 kb -> 1 mb
+1024 mb -> 1 gb
+1024 gb -> tb
+
