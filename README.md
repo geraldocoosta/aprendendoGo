@@ -306,3 +306,20 @@ Para converter um valor para o tipo que eu quero, eu insiro i tipo e o valor que
 
 Porém, tem que ter cuidado, dá exceção em tempo de execução
 
+Cap 4 aula 1 -> aula de boolean
+
+```go
+package main
+
+import "fmt" 
+
+var x bool 
+
+func main() {
+	fmt.Println(x) // zero value == false
+	x = true
+	fmt.Println(x) // atribuindo valor 
+	x = (10 < 100) // bool como resultado de operadores ralacionais
+	fmt.Println(x)
+}
+```
