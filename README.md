@@ -14,13 +14,11 @@ var teste = "uma string qualquer"
 func main() {
    teste = "outra string"
    fmt.Println(teste)
-}  
+}
 
 ```
 
-
 Ela pode ser mudada pelas funções, qualquer uma no mesmo package (não sei se consigo mudar em packages diferentes)
-
 
 O short variable declaration pode ser usado se ao menos uma variavel na mesma linha seja declarada, apesar de ser muito feio.
 ex:
@@ -271,3 +269,40 @@ Esse hotdog é meu tipo, que tem um tipo subjacente, que vem por trás como base
 Quando criamos nossos proprios tipos, podemos trabalhar com eles de forma que com os tipos primitivos nós não conseguimos.
 
 Apesar de hotdog nesse exemplo tenha o tipo subjacente como int, nós não podemos atribuir um int a ele
+
+Conversão de tipos
+
+No exemplo anterior, foi criado um tipo chamado hotdog, e foi visto que ele não aceita um int, mesmo sendo este seu tipo subjacente
+
+Para converter, para por exemplo um tipo hot dog ser aceito em um int
+
+```go
+package main
+
+import "fmt"
+
+type hotdog int
+
+var b hotdog = 10
+
+func main() {
+	x := 10
+	fmt.Printf("%v, %T\n", b, b)
+	fmt.Printf("%v, %T\n", x, x)
+
+	x = int(b)
+	fmt.Printf("%v, %T\n", x, x)
+
+}
+
+```
+
+Repare que ocorreu uma conversão. Conseguimos transformar uma variavel do tipo hotdog em int.
+(também chamado de casting, ou coercion)
+
+Para converter um valor para o tipo que eu quero, eu insiro i tipo e o valor que eu quero entre parentese, como no exemplo
+
+`int(12)`
+
+Porém, tem que ter cuidado, dá exceção em tempo de execução
+
