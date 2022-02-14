@@ -426,3 +426,10 @@ func main() {
 	fmt.Println(runtime.GOARCH)
 }
 ```
+
+Cap 4 aula 4 -> Overflow
+
+Se eu estourar a capacidade do type, o que acontece?
+Erro, como em quase todas as linguagens, só fica ligado com isso e tá de boa.
+
+Porém, se eu usar a atribuição com ++, ele volta a ser 0.
