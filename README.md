@@ -311,14 +311,14 @@ Cap 4 aula 1 -> aula de boolean
 ```go
 package main
 
-import "fmt" 
+import "fmt"
 
-var x bool 
+var x bool
 
 func main() {
 	fmt.Println(x) // zero value == false
 	x = true
-	fmt.Println(x) // atribuindo valor 
+	fmt.Println(x) // atribuindo valor
 	x = 10 < 100 // bool como resultado de operadores ralacionais
 	fmt.Println(x)
 }
@@ -328,21 +328,21 @@ Cap 4 aula 2 -> Como os computadores funcionam
 
 Computadores digitais funcionam com eletrecidade e podem estar ligados ou desligados
 estremas de codificação:
-	Com 1 lampada na varanda, que pode estar ligada ou desligada, podemos ter 2 
-	mensagens. 
-	Com 2 lampadas, 4 mensagens
-	Com 3 lampadas, 8 mensagens
+Com 1 lampada na varanda, que pode estar ligada ou desligada, podemos ter 2
+mensagens.
+Com 2 lampadas, 4 mensagens
+Com 3 lampadas, 8 mensagens
 
-	A formula, é sempre 2 elevado a n
+    A formula, é sempre 2 elevado a n
 
 Sabendo disso, podemos ter um esquema de codificação, atribuindo significado a cada uma
 dessas mensagens
-	2 lampadas
-	on 		on	-> festa
-	off 	off -> a mimir
+2 lampadas
+on on -> festa
+off off -> a mimir
 
 esses on off, podem ser substituidos por uns e zeros, e serem chamados de BInary digiTS
-bits   =)
+bits =)
 
 Quantificando bits
 1 bit
@@ -352,3 +352,77 @@ Quantificando bits
 1024 mb -> 1 gb
 1024 gb -> tb
 
+Cap 4 aula 3 -> Tipos numericos
+
+existem dois tipos numericos principais
+int inteiros
+float ponto flutuante
+
+Os tipos numerais no Go são
+
+uint -> unsigned, não tem sinal de menos
+int
+float
+complex
+byte -> alias para uint8, no caso, int sem sinal negativo com 8 bites (0 a 255)
+rune -> alias para int32, no caso, um int com 32 bits
+
+Não escolhemos com quantos bits vamos trabalhar, depende do computador que está rodando o programa.
+
+Todos os tipos numericos são distintos, menos byte e rune.
+
+Para verificar os bits usados por um caractere
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	a := "e"
+	b := "é"
+	c := "香"
+	g := "😂"
+
+	fmt.Printf("%v %v %v %v\n", a, b, c, g)
+
+	d := []byte(a)
+	e := []byte(b)
+	f := []byte(c)
+	h := []byte(g)
+	fmt.Printf("%v %v %v %v", d, e, f, h)
+}
+
+```
+
+resultado 
+
+```
+e é 香 😂
+[101] [195 169] [233 166 153] [240 159 152 130]
+```
+
+Da pra ver que cada byte é um item do "array", podendo ter 4, cada um indo até 255
+
+int e int32 não são a mesma coisa, para misturar, é necessário conversão
+
+Float point: racionais ou reais
+
+Não da pra colocar um float em um int 
+
+Pra verificar qual o OS e a arquitetura do pc onde está rodando o go, usar seguinte script
+
+```go
+package main
+
+import (
+	"fmt"
+	"runtime"
+)
+
+func main() {
+	fmt.Println(runtime.GOOS)
+	fmt.Println(runtime.GOARCH)
+}
+```
