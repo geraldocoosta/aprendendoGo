@@ -666,7 +666,7 @@ func main() {
 }
 ```
 
-Resultado: 
+Resultado:
 
 ```
 0 1 2
@@ -676,18 +676,18 @@ Numeros inteiros sucessivos na declaração de constantes, que podem ser usados 
 
 Serve para quando não ligamos para o valor da constante, só queremos que o valor seja diferente das outras (ENUM LIKE?)
 
-É possivel descartar valores usando underline(_)
+É possivel descartar valores usando underline(\_)
 
+Também é possivel fazer isso:
 
-Também é possivel fazer is7
-
+```go
 import "fmt"
 
 const (
-	a = iota * 2 
-	b 
-	_ 
-	d 
+	a = iota * 2
+	b
+	_
+	d
 )
 
 func main() {
@@ -695,7 +695,7 @@ func main() {
 }
 ```
 
-Resultado 
+Resultado
 
 ```
 
@@ -704,3 +704,33 @@ Resultado
 ```
 
 Podemos colocar uma formula depois do iota da primeira linha, e o go vai repetir a formula para os outros, para usar só com + 1, pode deixar só o primeiro iota que ele repete nos outros
+
+Cap 4 Aula 9 - Deslocamento de bits
+
+Deslocamento de bites é literalmente deslocar digitos binarios da direita pra esquerda ou da esquerda para a direita
+
+Como fazer isso?
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+	x := 1
+	y := x << 1
+
+	a := 10
+	b := a >> 1
+
+	fmt.Printf("%v - %b\n", x, x)
+	fmt.Printf("%v - %b\n", y, y)
+	fmt.Printf("%v - %b\n", a, a)
+	fmt.Printf("%v - %b\n", b, b)
+
+}
+
+```
+
+Não precisa ser só 1, pode ser um deslocamento de mais casas
