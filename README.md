@@ -643,3 +643,64 @@ func main() {
 	fmt.Println(a, y, z)
 }
 ```
+
+Cap 4 Aula 8 - IOTAs
+
+```go
+package main
+
+import "fmt"
+
+const (
+	x = iota
+	y = iota
+	z = iota
+)
+
+var a float64
+
+func main() {
+	a = x
+
+	fmt.Println(a, y, z)
+}
+```
+
+Resultado: 
+
+```
+0 1 2
+```
+
+Numeros inteiros sucessivos na declaração de constantes, que podem ser usados como float também, pois são constantes
+
+Serve para quando não ligamos para o valor da constante, só queremos que o valor seja diferente das outras (ENUM LIKE?)
+
+É possivel descartar valores usando underline(_)
+
+
+Também é possivel fazer is7
+
+import "fmt"
+
+const (
+	a = iota * 2 
+	b 
+	_ 
+	d 
+)
+
+func main() {
+	fmt.Println(a,b,d)
+}
+```
+
+Resultado 
+
+```
+
+0 1 3
+
+```
+
+Podemos colocar uma formula depois do iota da primeira linha, e o go vai repetir a formula para os outros, para usar só com + 1, pode deixar só o primeiro iota que ele repete nos outros
