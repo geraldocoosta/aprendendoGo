@@ -433,3 +433,127 @@ Se eu estourar a capacidade do type, o que acontece?
 Erro, como em quase todas as linguagens, só fica ligado com isso e tá de boa.
 
 Porém, se eu usar a atribuição com ++, ele volta a ser 0.
+
+Cap 4 aula 5 -> Strings
+
+Strings são sequencias de bytes imutaveis.
+Slice of byte em go. 
+Em go, pode ser feita entre "" ou ``
+
+Pra converter em slice de bytes
+
+```go
+s := "Teste"
+sb := []byte(s);
+fmt.Println(sb)
+
+for _, v := range sb {
+	fmt.Printf("%v - %T - %#U - %#x \n", v, v, v, v);
+}
+
+
+```
+
+
+Resultado
+
+```
+
+[84 101 115 116 101]
+84 - uint8 - U+0054 'T' - 0x54 
+101 - uint8 - U+0065 'e' - 0x65 
+115 - uint8 - U+0073 's' - 0x73 
+116 - uint8 - U+0074 't' - 0x74 
+101 - uint8 - U+0065 'e' - 0x65 
+
+```
+
+Também pode ser feito dessa maneira esse loop
+
+```go
+s := "teste é assim mosmo e é 香 😂"
+
+
+for _, v := range s {
+	fmt.Printf("%v - %T - %#U - %#x \n", v, v, v, v);
+}
+
+fmt.Println();
+
+for i := 0; i < len(s); i++ {
+	fmt.Printf("%v - %T - %#U - %#x \n", s[i], s[i], s[i], s[i]);
+}
+
+```
+
+Resultado
+
+```
+116 - int32 - U+0074 't' - 0x74 
+101 - int32 - U+0065 'e' - 0x65 
+115 - int32 - U+0073 's' - 0x73 
+116 - int32 - U+0074 't' - 0x74 
+101 - int32 - U+0065 'e' - 0x65 
+32 - int32 - U+0020 ' ' - 0x20 
+233 - int32 - U+00E9 'é' - 0xe9 
+32 - int32 - U+0020 ' ' - 0x20 
+97 - int32 - U+0061 'a' - 0x61 
+115 - int32 - U+0073 's' - 0x73 
+115 - int32 - U+0073 's' - 0x73 
+105 - int32 - U+0069 'i' - 0x69 
+109 - int32 - U+006D 'm' - 0x6d 
+32 - int32 - U+0020 ' ' - 0x20 
+109 - int32 - U+006D 'm' - 0x6d 
+111 - int32 - U+006F 'o' - 0x6f 
+115 - int32 - U+0073 's' - 0x73 
+109 - int32 - U+006D 'm' - 0x6d 
+111 - int32 - U+006F 'o' - 0x6f 
+32 - int32 - U+0020 ' ' - 0x20 
+101 - int32 - U+0065 'e' - 0x65 
+32 - int32 - U+0020 ' ' - 0x20 
+233 - int32 - U+00E9 'é' - 0xe9 
+32 - int32 - U+0020 ' ' - 0x20 
+39321 - int32 - U+9999 '香' - 0x9999 
+32 - int32 - U+0020 ' ' - 0x20 
+128514 - int32 - U+1F602 '😂' - 0x1f602 
+
+116 - uint8 - U+0074 't' - 0x74 
+101 - uint8 - U+0065 'e' - 0x65 
+115 - uint8 - U+0073 's' - 0x73 
+116 - uint8 - U+0074 't' - 0x74 
+101 - uint8 - U+0065 'e' - 0x65 
+32 - uint8 - U+0020 ' ' - 0x20 
+195 - uint8 - U+00C3 'Ã' - 0xc3 
+169 - uint8 - U+00A9 '©' - 0xa9 
+32 - uint8 - U+0020 ' ' - 0x20 
+97 - uint8 - U+0061 'a' - 0x61 
+115 - uint8 - U+0073 's' - 0x73 
+115 - uint8 - U+0073 's' - 0x73 
+105 - uint8 - U+0069 'i' - 0x69 
+109 - uint8 - U+006D 'm' - 0x6d 
+32 - uint8 - U+0020 ' ' - 0x20 
+109 - uint8 - U+006D 'm' - 0x6d 
+111 - uint8 - U+006F 'o' - 0x6f 
+115 - uint8 - U+0073 's' - 0x73 
+109 - uint8 - U+006D 'm' - 0x6d 
+111 - uint8 - U+006F 'o' - 0x6f 
+32 - uint8 - U+0020 ' ' - 0x20 
+101 - uint8 - U+0065 'e' - 0x65 
+32 - uint8 - U+0020 ' ' - 0x20 
+195 - uint8 - U+00C3 'Ã' - 0xc3 
+169 - uint8 - U+00A9 '©' - 0xa9 
+32 - uint8 - U+0020 ' ' - 0x20 
+233 - uint8 - U+00E9 'é' - 0xe9 
+166 - uint8 - U+00A6 '¦' - 0xa6 
+153 - uint8 - U+0099 - 0x99 
+32 - uint8 - U+0020 ' ' - 0x20 
+240 - uint8 - U+00F0 'ð' - 0xf0 
+159 - uint8 - U+009F - 0x9f 
+152 - uint8 - U+0098 - 0x98 
+130 - uint8 - U+0082 - 0x82 
+
+```
+
+range em um stream não dá bite por bite, e sim caractere por caractere
+
+no segundo for,ele converte para bite
