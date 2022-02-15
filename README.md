@@ -396,7 +396,7 @@ func main() {
 
 ```
 
-resultado 
+resultado
 
 ```
 e é 香 😂
@@ -409,7 +409,7 @@ int e int32 não são a mesma coisa, para misturar, é necessário conversão
 
 Float point: racionais ou reais
 
-Não da pra colocar um float em um int 
+Não da pra colocar um float em um int
 
 Pra verificar qual o OS e a arquitetura do pc onde está rodando o go, usar seguinte script
 
@@ -437,7 +437,7 @@ Porém, se eu usar a atribuição com ++, ele volta a ser 0.
 Cap 4 aula 5 -> Strings
 
 Strings são sequencias de bytes imutaveis.
-Slice of byte em go. 
+Slice of byte em go.
 Em go, pode ser feita entre "" ou ``
 
 Pra converter em slice de bytes
@@ -454,17 +454,16 @@ for _, v := range sb {
 
 ```
 
-
 Resultado
 
 ```
 
 [84 101 115 116 101]
-84 - uint8 - U+0054 'T' - 0x54 
-101 - uint8 - U+0065 'e' - 0x65 
-115 - uint8 - U+0073 's' - 0x73 
-116 - uint8 - U+0074 't' - 0x74 
-101 - uint8 - U+0065 'e' - 0x65 
+84 - uint8 - U+0054 'T' - 0x54
+101 - uint8 - U+0065 'e' - 0x65
+115 - uint8 - U+0073 's' - 0x73
+116 - uint8 - U+0074 't' - 0x74
+101 - uint8 - U+0065 'e' - 0x65
 
 ```
 
@@ -489,68 +488,68 @@ for i := 0; i < len(s); i++ {
 Resultado
 
 ```
-116 - int32 - U+0074 't' - 0x74 
-101 - int32 - U+0065 'e' - 0x65 
-115 - int32 - U+0073 's' - 0x73 
-116 - int32 - U+0074 't' - 0x74 
-101 - int32 - U+0065 'e' - 0x65 
-32 - int32 - U+0020 ' ' - 0x20 
-233 - int32 - U+00E9 'é' - 0xe9 
-32 - int32 - U+0020 ' ' - 0x20 
-97 - int32 - U+0061 'a' - 0x61 
-115 - int32 - U+0073 's' - 0x73 
-115 - int32 - U+0073 's' - 0x73 
-105 - int32 - U+0069 'i' - 0x69 
-109 - int32 - U+006D 'm' - 0x6d 
-32 - int32 - U+0020 ' ' - 0x20 
-109 - int32 - U+006D 'm' - 0x6d 
-111 - int32 - U+006F 'o' - 0x6f 
-115 - int32 - U+0073 's' - 0x73 
-109 - int32 - U+006D 'm' - 0x6d 
-111 - int32 - U+006F 'o' - 0x6f 
-32 - int32 - U+0020 ' ' - 0x20 
-101 - int32 - U+0065 'e' - 0x65 
-32 - int32 - U+0020 ' ' - 0x20 
-233 - int32 - U+00E9 'é' - 0xe9 
-32 - int32 - U+0020 ' ' - 0x20 
-39321 - int32 - U+9999 '香' - 0x9999 
-32 - int32 - U+0020 ' ' - 0x20 
-128514 - int32 - U+1F602 '😂' - 0x1f602 
+116 - int32 - U+0074 't' - 0x74
+101 - int32 - U+0065 'e' - 0x65
+115 - int32 - U+0073 's' - 0x73
+116 - int32 - U+0074 't' - 0x74
+101 - int32 - U+0065 'e' - 0x65
+32 - int32 - U+0020 ' ' - 0x20
+233 - int32 - U+00E9 'é' - 0xe9
+32 - int32 - U+0020 ' ' - 0x20
+97 - int32 - U+0061 'a' - 0x61
+115 - int32 - U+0073 's' - 0x73
+115 - int32 - U+0073 's' - 0x73
+105 - int32 - U+0069 'i' - 0x69
+109 - int32 - U+006D 'm' - 0x6d
+32 - int32 - U+0020 ' ' - 0x20
+109 - int32 - U+006D 'm' - 0x6d
+111 - int32 - U+006F 'o' - 0x6f
+115 - int32 - U+0073 's' - 0x73
+109 - int32 - U+006D 'm' - 0x6d
+111 - int32 - U+006F 'o' - 0x6f
+32 - int32 - U+0020 ' ' - 0x20
+101 - int32 - U+0065 'e' - 0x65
+32 - int32 - U+0020 ' ' - 0x20
+233 - int32 - U+00E9 'é' - 0xe9
+32 - int32 - U+0020 ' ' - 0x20
+39321 - int32 - U+9999 '香' - 0x9999
+32 - int32 - U+0020 ' ' - 0x20
+128514 - int32 - U+1F602 '😂' - 0x1f602
 
-116 - uint8 - U+0074 't' - 0x74 
-101 - uint8 - U+0065 'e' - 0x65 
-115 - uint8 - U+0073 's' - 0x73 
-116 - uint8 - U+0074 't' - 0x74 
-101 - uint8 - U+0065 'e' - 0x65 
-32 - uint8 - U+0020 ' ' - 0x20 
-195 - uint8 - U+00C3 'Ã' - 0xc3 
-169 - uint8 - U+00A9 '©' - 0xa9 
-32 - uint8 - U+0020 ' ' - 0x20 
-97 - uint8 - U+0061 'a' - 0x61 
-115 - uint8 - U+0073 's' - 0x73 
-115 - uint8 - U+0073 's' - 0x73 
-105 - uint8 - U+0069 'i' - 0x69 
-109 - uint8 - U+006D 'm' - 0x6d 
-32 - uint8 - U+0020 ' ' - 0x20 
-109 - uint8 - U+006D 'm' - 0x6d 
-111 - uint8 - U+006F 'o' - 0x6f 
-115 - uint8 - U+0073 's' - 0x73 
-109 - uint8 - U+006D 'm' - 0x6d 
-111 - uint8 - U+006F 'o' - 0x6f 
-32 - uint8 - U+0020 ' ' - 0x20 
-101 - uint8 - U+0065 'e' - 0x65 
-32 - uint8 - U+0020 ' ' - 0x20 
-195 - uint8 - U+00C3 'Ã' - 0xc3 
-169 - uint8 - U+00A9 '©' - 0xa9 
-32 - uint8 - U+0020 ' ' - 0x20 
-233 - uint8 - U+00E9 'é' - 0xe9 
-166 - uint8 - U+00A6 '¦' - 0xa6 
-153 - uint8 - U+0099 - 0x99 
-32 - uint8 - U+0020 ' ' - 0x20 
-240 - uint8 - U+00F0 'ð' - 0xf0 
-159 - uint8 - U+009F - 0x9f 
-152 - uint8 - U+0098 - 0x98 
-130 - uint8 - U+0082 - 0x82 
+116 - uint8 - U+0074 't' - 0x74
+101 - uint8 - U+0065 'e' - 0x65
+115 - uint8 - U+0073 's' - 0x73
+116 - uint8 - U+0074 't' - 0x74
+101 - uint8 - U+0065 'e' - 0x65
+32 - uint8 - U+0020 ' ' - 0x20
+195 - uint8 - U+00C3 'Ã' - 0xc3
+169 - uint8 - U+00A9 '©' - 0xa9
+32 - uint8 - U+0020 ' ' - 0x20
+97 - uint8 - U+0061 'a' - 0x61
+115 - uint8 - U+0073 's' - 0x73
+115 - uint8 - U+0073 's' - 0x73
+105 - uint8 - U+0069 'i' - 0x69
+109 - uint8 - U+006D 'm' - 0x6d
+32 - uint8 - U+0020 ' ' - 0x20
+109 - uint8 - U+006D 'm' - 0x6d
+111 - uint8 - U+006F 'o' - 0x6f
+115 - uint8 - U+0073 's' - 0x73
+109 - uint8 - U+006D 'm' - 0x6d
+111 - uint8 - U+006F 'o' - 0x6f
+32 - uint8 - U+0020 ' ' - 0x20
+101 - uint8 - U+0065 'e' - 0x65
+32 - uint8 - U+0020 ' ' - 0x20
+195 - uint8 - U+00C3 'Ã' - 0xc3
+169 - uint8 - U+00A9 '©' - 0xa9
+32 - uint8 - U+0020 ' ' - 0x20
+233 - uint8 - U+00E9 'é' - 0xe9
+166 - uint8 - U+00A6 '¦' - 0xa6
+153 - uint8 - U+0099 - 0x99
+32 - uint8 - U+0020 ' ' - 0x20
+240 - uint8 - U+00F0 'ð' - 0xf0
+159 - uint8 - U+009F - 0x9f
+152 - uint8 - U+0098 - 0x98
+130 - uint8 - U+0082 - 0x82
 
 ```
 
@@ -562,9 +561,9 @@ Cap 4 Aula 6 - Sistemas numericos
 
 Decimal, Númerico, Hexadecimal
 
-decimal 		- base 10 - 0-9
-binario 		- base 2  - 0-1
-hexadeciamal 	- base 16 - 0-f
+decimal - base 10 - 0-9
+binario - base 2 - 0-1
+hexadeciamal - base 16 - 0-f
 
 Vi isso na faculdade, só verificando
 
@@ -587,10 +586,60 @@ func main() {
 ```
 
 resultado
+
 ```
 
 100, 1100100, 0x64
 
 ```
 
+Cap 4 Aula 7 - Constantes (aeeeeee)
 
+Constantes são váriaveis imutaveis, que não pode mudar a instancia nunca
+
+Podem ou não ser tipada, por exemplo
+
+```go
+const oi := "bom dia"
+const oiTipado string := "BOOOM DIA"
+```
+
+As constantes não tipadas, em go, só ganham o tipo quando forem usadas,
+Isso é feito para ganhar flexibilidade, pois o go atribui tipo dependendo do host que está rodando o programa
+
+```go
+package main
+
+import "fmt"
+
+const b = 10
+
+var a float64
+
+func main() {
+	a = b
+	fmt.Println(a)
+}
+```
+
+No momento que o programa roda, e a interação do a recebendo b acontece, a contante b vira um float, antes disso, ela não tem tipo atribuido
+O tipo de uma váriavel é definido em tempo de atribuição.
+
+Pode-se declarar constantes assim também
+
+```go
+package main
+
+import "fmt"
+
+const (
+	x = 10
+	y = 10
+	z = 10
+)
+
+
+func main() {
+	fmt.Println(a, y, z)
+}
+```
