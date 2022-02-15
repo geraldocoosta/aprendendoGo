@@ -557,3 +557,40 @@ Resultado
 range em um stream não dá bite por bite, e sim caractere por caractere
 
 no segundo for,ele converte para bite
+
+Cap 4 Aula 6 - Sistemas numericos
+
+Decimal, Númerico, Hexadecimal
+
+decimal 		- base 10 - 0-9
+binario 		- base 2  - 0-1
+hexadeciamal 	- base 16 - 0-f
+
+Vi isso na faculdade, só verificando
+
+Para ver esse valores em GO
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	valor := 100;
+
+	fmt.Printf("%d, %b, %#x\n", valor, valor, valor)
+
+}
+
+
+```
+
+resultado
+```
+
+100, 1100100, 0x64
+
+```
+
+
