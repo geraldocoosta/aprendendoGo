@@ -819,3 +819,33 @@ func main() {
 ```
 
 O for também funciona com um range, que será visto mais a frente no curso.
+
+- Cap. 6 – Fluxo de Controle – 5. Loops: break & continue
+
+```go
+
+func main() {
+
+	for i := 0; i < 100; i++ {
+		if i%2 != 0 {
+			fmt.Println("Irei pular para o próximo, esse numero não é legal")
+			continue
+		}
+		if i == 58 {
+			fmt.Println("Cansei desse loop, vou para casa")
+			break
+		}
+		fmt.Println(i)
+	}
+
+	fmt.Println("Indo para casa")
+
+}
+
+```
+
+Funciona igual ao java
+Ao bater no break vai para o próximo statement após o for
+Ao bater em um continue dentro do for, imediatamente acrescenta um e volta para o começo do code block do for
+
+O modulo (%), também não tinha sido explicado, mas funciona igual as outras linguagens, modulo de uma operação, resto da divisão
