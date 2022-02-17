@@ -327,13 +327,12 @@ func main() {
 - Cap 4 aula 2 -> Como os computadores funcionam
 
 - Computadores digitais funcionam com eletricidade e podem estar ligados ou desligados
-estremas de codificação:
-Com 1 lampada na varanda, que pode estar ligada ou desligada, podemos ter 2
-mensagens.
-Com 2 lampadas, 4 mensagens
-Com 3 lampadas, 8 mensagens
+  - estremas de codificação:
+    - Com 1 lampada na varanda, que pode estar ligada ou desligada, podemos ter 2 mensagens.
+    - Com 2 lampadas, 4 mensagens
+    - Com 3 lampadas, 8 mensagens
 
-    A formula, é sempre 2 elevado a n
+A formula, é sempre 2 elevado a n
 
 Sabendo disso, podemos ter um esquema de codificação, atribuindo significado a cada uma
 dessas mensagens
@@ -735,10 +734,88 @@ func main() {
 
 Não precisa ser só 1, pode ser um deslocamento de mais casas
 
-
 - CAP 6 - Entendendo fluxo de controle
 
-Sequencial -> uma linha depois da outra, da esquerda para a direita
-Condicional -> if, switch
-Repetição -> while, do while, for
+Os tipos de fluxo de controle: - Sequencial -> uma linha depois da outra, da esquerda para a direita - Condicional -> if, switch - Repetição -> while, do while, for
 
+- Cap. 6 – Fluxo de Controle – 2. Loops: inicialização, condição, pós
+
+Exemplo pratico
+
+```go
+		for var i int = 0; i < 10; i++ {
+		fmt.Println(i)
+	}
+
+```
+
+Pra mim, que estou vindo do java, a diferença é, depois da palavra reservada for, não tenho parenteses, apenas chaves para o corpo do for
+
+De resto, é bem igual, tirando a forma que o short variable declaration funciona.
+
+O seguinte exemplo não funciona
+
+```go
+	// ISSO DÁ ERRO
+	for var i int = 0; i < 10; i++ {
+		fmt.Println(i)
+	}
+```
+
+Dá o seguinte erro
+
+```
+./prog.go:10:10: syntax error: var declaration not allowed in for initializer
+```
+
+Aparentemente, pra váriavel contadora usada em um for, não é aceito a palavra reservada var para inicialização
+
+O seguinte exemplo funciona:
+
+```go
+
+func main() {
+	var i int = 0
+	for ; i < 10; i++ {
+		fmt.Println(i)
+	}
+}
+
+```
+
+- IMPORTANTE:
+
+  - não existe while :)
+  - No final de todo statement (relembrando, uma ou mais expressões), o compilador do go adiciona o ponto e virgula pra gente, porém, quando temos mais de um statement na mesma linha, temos que adicionar manualmente
+
+- Cap. 6 – Fluxo de Controle – 4. Loops: a declaração for
+
+O for funciona do Go pode funcionar como um while
+
+```go
+
+func main() {
+	i := 0
+	for i < 10 {
+		fmt.Println(i)
+		i++
+	}
+}
+
+```
+
+Explicando o exemplo, para funcionar como while, deve ter só um statement, diferente do for normal que tem 3 statements separados por ponto e virgual (;)
+
+Podemos criar uma condição eterna com isso, não precisamos declarar nenhum statement para o for
+
+```go
+
+func main() {
+	for {
+		fmt.Println("Loop forever")
+	}
+}
+
+```
+
+O for também funciona com um range, que será visto mais a frente no curso.
