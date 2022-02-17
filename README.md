@@ -324,9 +324,9 @@ func main() {
 }
 ```
 
-Cap 4 aula 2 -> Como os computadores funcionam
+- Cap 4 aula 2 -> Como os computadores funcionam
 
-Computadores digitais funcionam com eletrecidade e podem estar ligados ou desligados
+- Computadores digitais funcionam com eletricidade e podem estar ligados ou desligados
 estremas de codificação:
 Com 1 lampada na varanda, que pode estar ligada ou desligada, podemos ter 2
 mensagens.
@@ -358,14 +358,14 @@ existem dois tipos numericos principais
 int inteiros
 float ponto flutuante
 
-Os tipos numerais no Go são
+- Os tipos numerais no Go são
 
-uint -> unsigned, não tem sinal de menos
-int
-float
-complex
-byte -> alias para uint8, no caso, int sem sinal negativo com 8 bites (0 a 255)
-rune -> alias para int32, no caso, um int com 32 bits
+- uint -> unsigned, não tem sinal de menos
+- int
+- float
+- complex
+- byte -> alias para uint8, no caso, int sem sinal negativo com 8 bites (0 a 255)
+- rune -> alias para int32, no caso, um int com 32 bits
 
 Não escolhemos com quantos bits vamos trabalhar, depende do computador que está rodando o programa.
 
@@ -734,3 +734,11 @@ func main() {
 ```
 
 Não precisa ser só 1, pode ser um deslocamento de mais casas
+
+
+- CAP 6 - Entendendo fluxo de controle
+
+Sequencial -> uma linha depois da outra, da esquerda para a direita
+Condicional -> if, switch
+Repetição -> while, do while, for
+
