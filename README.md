@@ -1,4 +1,4 @@
-Em GO
+# GO
 
 := is a short variable declaration, basicamente faz a operação de declaração e atribuição
 
@@ -98,16 +98,15 @@ import "fmt"
 var test int
 
 func main() {
-	test = 10
-	fmt.Println(test)
+    test = 10
+    fmt.Println(test)
 }
 
 ```
 
 se eu tentar atribuir valor a variavel a nivel de package, da o seguinte erro
 
-```
-
+```log
 ./prog.go:8:1: syntax error: non-declaration statement outside function body
 
 ```
@@ -162,9 +161,9 @@ var c string
 var d bool
 
 func main() {
-	fmt.Printf("%v, %T\n", a, a)
-	fmt.Printf("%v, %T\n", b, b)
-	fmt.Printf("%v, %T\n", c, c)
+    fmt.Printf("%v, %T\n", a, a)
+    fmt.Printf("%v, %T\n", b, b)
+    fmt.Printf("%v, %T\n", c, c)
     fmt.Printf("%v, %T\n", d, d)
 }
 
@@ -172,7 +171,7 @@ func main() {
 
 resultado
 
-```
+```log
 
 0, int
 0, float64
@@ -256,7 +255,7 @@ var b hotdog
 
 func main() {
 
-	fmt.Printf("%v, %T\n", b, b)
+    fmt.Printf("%v, %T\n", b, b)
 }
 
 
@@ -286,12 +285,12 @@ type hotdog int
 var b hotdog = 10
 
 func main() {
-	x := 10
-	fmt.Printf("%v, %T\n", b, b)
-	fmt.Printf("%v, %T\n", x, x)
+    x := 10
+    fmt.Printf("%v, %T\n", b, b)
+    fmt.Printf("%v, %T\n", x, x)
 
-	x = int(b)
-	fmt.Printf("%v, %T\n", x, x)
+    x = int(b)
+    fmt.Printf("%v, %T\n", x, x)
 
 }
 
@@ -316,11 +315,11 @@ import "fmt"
 var x bool
 
 func main() {
-	fmt.Println(x) // zero value == false
-	x = true
-	fmt.Println(x) // atribuindo valor
-	x = 10 < 100 // bool como resultado de operadores ralacionais
-	fmt.Println(x)
+    fmt.Println(x) // zero value == false
+    x = true
+    fmt.Println(x) // atribuindo valor
+    x = 10 < 100 // bool como resultado de operadores ralacionais
+    fmt.Println(x)
 }
 ```
 
@@ -379,25 +378,25 @@ import "fmt"
 
 func main() {
 
-	a := "e"
-	b := "é"
-	c := "香"
-	g := "😂"
+    a := "e"
+    b := "é"
+    c := "香"
+    g := "😂"
 
-	fmt.Printf("%v %v %v %v\n", a, b, c, g)
+    fmt.Printf("%v %v %v %v\n", a, b, c, g)
 
-	d := []byte(a)
-	e := []byte(b)
-	f := []byte(c)
-	h := []byte(g)
-	fmt.Printf("%v %v %v %v", d, e, f, h)
+    d := []byte(a)
+    e := []byte(b)
+    f := []byte(c)
+    h := []byte(g)
+    fmt.Printf("%v %v %v %v", d, e, f, h)
 }
 
 ```
 
 resultado
 
-```
+```log
 e é 香 😂
 [101] [195 169] [233 166 153] [240 159 152 130]
 ```
@@ -416,13 +415,13 @@ Pra verificar qual o OS e a arquitetura do pc onde está rodando o go, usar segu
 package main
 
 import (
-	"fmt"
-	"runtime"
+    "fmt"
+    "runtime"
 )
 
 func main() {
-	fmt.Println(runtime.GOOS)
-	fmt.Println(runtime.GOARCH)
+    fmt.Println(runtime.GOOS)
+    fmt.Println(runtime.GOARCH)
 }
 ```
 
@@ -447,7 +446,7 @@ sb := []byte(s);
 fmt.Println(sb)
 
 for _, v := range sb {
-	fmt.Printf("%v - %T - %#U - %#x \n", v, v, v, v);
+    fmt.Printf("%v - %T - %#U - %#x \n", v, v, v, v);
 }
 
 
@@ -455,7 +454,7 @@ for _, v := range sb {
 
 Resultado
 
-```
+```log
 
 [84 101 115 116 101]
 84 - uint8 - U+0054 'T' - 0x54
@@ -473,20 +472,20 @@ s := "teste é assim mosmo e é 香 😂"
 
 
 for _, v := range s {
-	fmt.Printf("%v - %T - %#U - %#x \n", v, v, v, v);
+    fmt.Printf("%v - %T - %#U - %#x \n", v, v, v, v);
 }
 
 fmt.Println();
 
 for i := 0; i < len(s); i++ {
-	fmt.Printf("%v - %T - %#U - %#x \n", s[i], s[i], s[i], s[i]);
+    fmt.Printf("%v - %T - %#U - %#x \n", s[i], s[i], s[i], s[i]);
 }
 
 ```
 
 Resultado
 
-```
+```log
 116 - int32 - U+0074 't' - 0x74
 101 - int32 - U+0065 'e' - 0x65
 115 - int32 - U+0073 's' - 0x73
@@ -575,9 +574,9 @@ import "fmt"
 
 func main() {
 
-	valor := 100;
+    valor := 100;
 
-	fmt.Printf("%d, %b, %#x\n", valor, valor, valor)
+    fmt.Printf("%d, %b, %#x\n", valor, valor, valor)
 
 }
 
@@ -586,7 +585,7 @@ func main() {
 
 resultado
 
-```
+```log
 
 100, 1100100, 0x64
 
@@ -616,8 +615,8 @@ const b = 10
 var a float64
 
 func main() {
-	a = b
-	fmt.Println(a)
+    a = b
+    fmt.Println(a)
 }
 ```
 
@@ -632,14 +631,14 @@ package main
 import "fmt"
 
 const (
-	x = 10
-	y = 10
-	z = 10
+    x = 10
+    y = 10
+    z = 10
 )
 
 
 func main() {
-	fmt.Println(a, y, z)
+    fmt.Println(a, y, z)
 }
 ```
 
@@ -651,23 +650,23 @@ package main
 import "fmt"
 
 const (
-	x = iota
-	y = iota
-	z = iota
+    x = iota
+    y = iota
+    z = iota
 )
 
 var a float64
 
 func main() {
-	a = x
+    a = x
 
-	fmt.Println(a, y, z)
+    fmt.Println(a, y, z)
 }
 ```
 
 Resultado:
 
-```
+```log
 0 1 2
 ```
 
@@ -683,20 +682,20 @@ Também é possivel fazer isso:
 import "fmt"
 
 const (
-	a = iota * 2
-	b
-	_
-	d
+    a = iota * 2
+    b
+    _
+    d
 )
 
 func main() {
-	fmt.Println(a,b,d)
+    fmt.Println(a,b,d)
 }
 ```
 
 Resultado
 
-```
+```log
 
 0 1 3
 
@@ -717,16 +716,16 @@ package main
 import "fmt"
 
 func main() {
-	x := 1
-	y := x << 1
+    x := 1
+    y := x << 1
 
-	a := 10
-	b := a >> 1
+    a := 10
+    b := a >> 1
 
-	fmt.Printf("%v - %b\n", x, x)
-	fmt.Printf("%v - %b\n", y, y)
-	fmt.Printf("%v - %b\n", a, a)
-	fmt.Printf("%v - %b\n", b, b)
+    fmt.Printf("%v - %b\n", x, x)
+    fmt.Printf("%v - %b\n", y, y)
+    fmt.Printf("%v - %b\n", a, a)
+    fmt.Printf("%v - %b\n", b, b)
 
 }
 
@@ -736,16 +735,20 @@ Não precisa ser só 1, pode ser um deslocamento de mais casas
 
 - CAP 6 - Entendendo fluxo de controle
 
-Os tipos de fluxo de controle: - Sequencial -> uma linha depois da outra, da esquerda para a direita - Condicional -> if, switch - Repetição -> while, do while, for
+Os tipos de fluxo de controle:
+
+- Sequencial -> uma linha depois da outra, da esquerda para a direita
+- Condicional -> if, switch
+- Repetição -> while, do while, for
 
 - Cap. 6 – Fluxo de Controle – 2. Loops: inicialização, condição, pós
 
 Exemplo pratico
 
 ```go
-		for var i int = 0; i < 10; i++ {
-		fmt.Println(i)
-	}
+        for var i int = 0; i < 10; i++ {
+        fmt.Println(i)
+    }
 
 ```
 
@@ -756,15 +759,15 @@ De resto, é bem igual, tirando a forma que o short variable declaration funcion
 O seguinte exemplo não funciona
 
 ```go
-	// ISSO DÁ ERRO
-	for var i int = 0; i < 10; i++ {
-		fmt.Println(i)
-	}
+    // ISSO DÁ ERRO
+    for var i int = 0; i < 10; i++ {
+        fmt.Println(i)
+    }
 ```
 
 Dá o seguinte erro
 
-```
+```log
 ./prog.go:10:10: syntax error: var declaration not allowed in for initializer
 ```
 
@@ -775,10 +778,10 @@ O seguinte exemplo funciona:
 ```go
 
 func main() {
-	var i int = 0
-	for ; i < 10; i++ {
-		fmt.Println(i)
-	}
+    var i int = 0
+    for ; i < 10; i++ {
+        fmt.Println(i)
+    }
 }
 
 ```
@@ -795,11 +798,11 @@ O for funciona do Go pode funcionar como um while
 ```go
 
 func main() {
-	i := 0
-	for i < 10 {
-		fmt.Println(i)
-		i++
-	}
+    i := 0
+    for i < 10 {
+        fmt.Println(i)
+        i++
+    }
 }
 
 ```
@@ -811,9 +814,9 @@ Podemos criar uma condição eterna com isso, não precisamos declarar nenhum st
 ```go
 
 func main() {
-	for {
-		fmt.Println("Loop forever")
-	}
+    for {
+        fmt.Println("Loop forever")
+    }
 }
 
 ```
@@ -826,19 +829,19 @@ O for também funciona com um range, que será visto mais a frente no curso.
 
 func main() {
 
-	for i := 0; i < 100; i++ {
-		if i%2 != 0 {
-			fmt.Println("Irei pular para o próximo, esse numero não é legal")
-			continue
-		}
-		if i == 58 {
-			fmt.Println("Cansei desse loop, vou para casa")
-			break
-		}
-		fmt.Println(i)
-	}
+    for i := 0; i < 100; i++ {
+        if i%2 != 0 {
+            fmt.Println("Irei pular para o próximo, esse numero não é legal")
+            continue
+        }
+        if i == 58 {
+            fmt.Println("Cansei desse loop, vou para casa")
+            break
+        }
+        fmt.Println(i)
+    }
 
-	fmt.Println("Indo para casa")
+    fmt.Println("Indo para casa")
 
 }
 
