@@ -873,6 +873,215 @@ func main() {
 
 Basicamente, isso seria um operador de inicialização, executado antes do if rodar.
 
-Cap. 6 – Fluxo de Controle – 8. Condicionais: if, else if, else
+- Cap. 6 – Fluxo de Controle – 8. Condicionais: if, else if, else
 
 Do mesmo jeito de outras linguagens
+
+- Cap. 6 – Fluxo de Controle – 9. Condicionais: a declaração switch
+
+Switch no Go, tem sua peculiaridades, por exemplo, não é necessário falar para o go qual váriavel eu estou fazendo o switch
+
+Ex:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := 10;
+
+    switch {
+        case x < 5: fmt.Println("chis é  < 5 ")
+        case x == 5: fmt.Println("chis é  == 5 ")
+        case x > 5: fmt.Println("chis é > 5 ")
+    }
+
+}
+
+```
+
+O switch em go, aceita uma váriavel na frente da palavra reservada switch, que vai comparar o resultado do case com aquele valor.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := 10;
+
+    switch false{
+        case x < 5: fmt.Println("chis é  < 5 ")
+        case x == 5: fmt.Println("chis é  == 5 ")
+        case x > 5: fmt.Println("chis é > 5 ")
+    }
+
+}
+
+```
+
+Resultado
+
+```log
+chis é  < 5 
+```
+
+Mas como assim ? o x é igual a 10!! Sim meu jovem, porém, o go vai pegar o resultado da expressão do case, e comparar com o valor depois da palavra chave switch, se essa comparação for verdadeira, então ele será o caso correcto.
+
+Basicamenmte, é o equivalente a `if (x < 5) == false`.
+
+Na verdade, quando não colocamos nada, aquilo é simplesmente true. Podemos colocar até string se a gente quiser.
+
+Não existe fall through por padrão, ou seja, não é que nem java, não precisamos de vários breaks no switch
+
+Para fall through, devemos falar pro go que queremos esse comportamento
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := 10;
+
+    switch {
+        case x == 10: 
+            fmt.Println("fazendo algo, pois 10 é igual 10")
+            fallthrough
+        case x < 10: 
+            fmt.Println("fazendo algo, pois 10 é menor 10")
+        case x >10: 
+            fmt.Println("fazendo algo, pois 10 é maior 10")
+    }
+
+}
+
+```
+
+Como eu ativei o fallthrough, veja o resultado:
+
+```log
+fazendo algo, pois 10 é igual 10
+fazendo algo, pois 10 é menor 10
+```
+
+Esse comportamento só acontece quando coloco a palavra chave fallthrough no bloco de um case
+
+valor default
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := "rodolfo"
+    y := "maria"
+    z := "alfredo"
+
+    switch "zé"{
+        case x: 
+            fmt.Println("Rodolfinhooooooo")
+        case y: 
+            fmt.Println("Mariaaaaaaaaaaa")
+        case z: 
+            fmt.Println("Alfred")
+        default:
+            fmt.Println("Mas que coisa, parece que nada")
+    }
+
+}
+
+```
+
+Switch composto
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := "rodolfo"
+    y := "maria"
+    z := "alfredo"
+
+    switch "zé"{
+        case x: 
+            fmt.Println("Rodolfinhooooooo")
+        case y: 
+            fmt.Println("Mariaaaaaaaaaaa")
+        case z: 
+            fmt.Println("Alfred")
+        default:
+            fmt.Println("Mas que coisa, parece que nada")
+    }
+
+}
+
+```
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := "rodolfo"
+    y := "maria"
+    z := "alfredo"
+    w := "zé"
+
+    switch "zé"{
+        case x, y: 
+            fmt.Println("Rodolfinhooooooo ou Mariaaaaaa")
+        case z, w: 
+            fmt.Println("Alfred e zé")
+        default:
+            fmt.Println("Mas que coisa, parece que nada")
+    }
+
+}
+
+```
+
+Output
+
+```log
+Alfred e zé
+```
+
+Não irei explicar, tu já desenvolve a alguns anos, foca ai que tu consegue geraldo
+
+Mas lembrando que, esse switch também aceita essa sintaxe
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    x := 1
+    
+    switch {
+        case (x == 4), (x == 3): 
+            fmt.Println("4 ou 3")
+        case (x == 2), (x == 1): 
+            fmt.Println("2 ou 1")
+    }
+
+}
+
+```
+
+Agora dá pra ir longe, pois podemos colocar várias expressão, ou statements
+
+Lembrando que, a virgula ali é meio que um ou.
