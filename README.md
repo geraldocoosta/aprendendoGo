@@ -872,3 +872,7 @@ func main() {
 ```
 
 Basicamente, isso seria um operador de inicialização, executado antes do if rodar.
+
+Cap. 6 – Fluxo de Controle – 8. Condicionais: if, else if, else
+
+Do mesmo jeito de outras linguagens
