@@ -852,3 +852,23 @@ Ao bater no break vai para o próximo statement após o for
 Ao bater em um continue dentro do for, imediatamente acrescenta um e volta para o começo do code block do for
 
 O modulo (%), também não tinha sido explicado, mas funciona igual as outras linguagens, modulo de uma operação, resto da divisão
+
+- Cap. 6 – Fluxo de Controle – 7. Condicionais: a declaração if
+
+Funciona basicamente como em outras linguagens, porém, a expressão booleana não fica entre parenteses
+Porém, dentro do if, ele aceita short declaration valiable junto com o ifm ou seja
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    if x := 10; x < 100 {
+        fmt.Println("Hello World")
+    }
+}
+
+```
+
+Basicamente, isso seria um operador de inicialização, executado antes do if rodar.
