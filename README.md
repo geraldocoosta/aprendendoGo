@@ -1085,3 +1085,56 @@ func main() {
 Agora dá pra ir longe, pois podemos colocar várias expressão, ou statements
 
 Lembrando que, a virgula ali é meio que um ou.
+
+- Cap. 6 – Fluxo de Controle – 10. Condicionais: a declaração switch pt. 2 & documentação
+
+Basicamente, acho o switch também identifica types
+
+```go
+package main
+
+import "fmt"
+
+var x interface{}
+
+func main() {
+
+    x = 10
+
+    switch x.(type) {
+        case int:
+            fmt.Println(x, "é um int")
+        case bool:
+            fmt.Println(x, "é um bool")
+        case string:
+            fmt.Println(x, "é uma string")
+        case float64:
+            fmt.Println(x, "é um float64")
+    }
+}
+```
+
+Uma coisa maneirinha, é isso:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    switch x := 1; {
+        case x == 1: fmt.Printf("O valor é %d", 1)
+        case x == 2: fmt.Printf("O valor é %d", 2)
+        case x == 3: fmt.Printf("O valor é %d", 3)
+        case x == 4: fmt.Printf("O valor é %d", 4)
+    } 
+}
+```
+
+Se o switch não der match com nada, aparentemente não dá erro.
+
+A unica parte que não vi, é se podemos usar switch para atribuição de váriavel
+
+- Cap. 6 – Fluxo de Controle – 11. Operadores lógicos condicionais
+
+São o && e o ||, segue o mesmo padrão de outras linguagens.
