@@ -1148,3 +1148,117 @@ A unica parte que não vi, é se podemos usar switch para atribuição de vária
 - Cap. 6 – Fluxo de Controle – 11. Operadores lógicos condicionais
 
 São o && e o ||, segue o mesmo padrão de outras linguagens.
+
+- Cap. 8 – Agrupamentos de Dados – 1. Array
+
+Existem na GoLang
+
+Array, Slace, Maps, Structs
+
+Array: Tipo não utilizado tanto no dia a dia, é o bloco fundamental aonde o slice é construido
+
+Exemplo de Array:
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+var x [5]int
+
+func main() {
+    x[0] = 1
+    x[1] = 10
+
+    fmt.Println(x[0])
+    fmt.Println(x[1])
+    fmt.Println(x)
+}
+```
+
+Resultado
+
+```log
+[1 10 0 0 0]
+```
+
+Array: Uma estrutura de dados, que pode carregar mais de um dado de um tipo, o tamanho de um array deve ser definido antes de utiliza-lo
+Integralmente, o tipo de array contém o tamanho dele, logo na declaração da váriavel, coloca-se o tamanho, e se diz assim: "É um array de 5 ints"
+
+Logo, ao se fazer isso:
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+var x [5]int
+
+func main() {
+
+    fmt.Printf("%T", x) //Lembrando que o %T mostra o tipo
+}
+
+```
+
+A saída será
+
+```go
+[5]int
+
+```
+
+O array tem tamanho fixo, já cansei de falar, e se você tentar colocar um valor nele além do seu limite, dá um erro, exemplo:
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+var x [5]int
+
+func main() {
+    x[6] = 8
+    fmt.Printf("%T", x)
+}
+```
+
+Resultado
+
+```log
+./prog.go:10:3: invalid array index 6 (out of bounds for 5-element array)
+```
+
+Um array de 6 ints e de 5 ints não são compativeis entre si.
+
+Funções que podemos utilizar em arrays:
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+var x [5]int
+
+func main() {
+    fmt.Println(len(x))
+}
+```
+
+```log
+5
+```
+
+O bom de saber de array, é saber que não vamos utilizar array, então basicamente é isso, funciona basicamente como no Java.
+
+Arrays são uteis quando precisamos planejar o layout da memoria em detalhes (muito baixo nivel)
+
+Use SLICE.
