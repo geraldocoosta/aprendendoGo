@@ -875,7 +875,17 @@ Basicamente, isso seria um operador de inicialização, executado antes do if ro
 
 - Cap. 6 – Fluxo de Controle – 8. Condicionais: if, else if, else
 
-Do mesmo jeito de outras linguagens
+Do mesmo jeito de outras linguagens, porém temos isso:
+
+```go
+    if x := 12; x < 12 {
+        fmt.Println("chis é menor que doze meoooo")
+    } else if x > 12 {
+        fmt.Println("chis é maior que doze meoooo")
+    } else {
+        fmt.Println("chis é 12 meoooo")
+    }
+```
 
 - Cap. 6 – Fluxo de Controle – 9. Condicionais: a declaração switch
 
