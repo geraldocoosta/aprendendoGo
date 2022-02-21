@@ -1464,3 +1464,15 @@ func main() {
 ```go
     sabores = append(sabores[:3], sabores[4:]...)
 ```
+
+- Cap. 8 – Agrupamentos de Dados – 5. Slice: anexando a uma slice
+
+Como funciona a função append?
+
+Sabemos que ela anexa itens a um slice, e faz parte do package builtin
+
+Essa função recebe um slice de um tipo, e vários elementos de outro tipo como segundo argumento em diante
+
+No exemplo passado, da aula anterior, utilizou os 3 pontos para o go entender que são vários ints.
+
+Os 3 pontos pode ser chamado como unfurl ou enumerations. Basicamente, desenrola os itens do slice e coloca um de cada vez.
