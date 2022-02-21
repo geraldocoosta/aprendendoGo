@@ -1262,3 +1262,77 @@ O bom de saber de array, é saber que não vamos utilizar array, então basicame
 Arrays são uteis quando precisamos planejar o layout da memoria em detalhes (muito baixo nivel)
 
 Use SLICE.
+
+- Cap. 8 – Agrupamentos de Dados – 2. Slice: literal composta
+
+Em arrays, podemos inicializar valores da seguinte forma
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    array := [5]int{1, 2, 3, 4, 5}
+    fmt.Println(array)
+    slice := []int{1, 2, 3, 4, 5}
+    fmt.Println(slice)
+}
+
+```
+
+Resultado
+
+```log
+[1 2 3 4 5]
+[1 2 3 4 5]
+```
+
+Qual a diferença entre o array e o slice então?
+
+Simples, o Slice não declara o tanto de valores que pode receber.
+
+Para mudar o tamanho do slice, adicionando um no final
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    array := [5]int{1, 2, 3, 4, 5}
+    fmt.Println(array)
+    slice := []int{1, 2, 3, 4, 5}
+    fmt.Println(slice)
+
+    slice2 := append(slice, 6)
+    fmt.Println(slice2)
+}
+```
+
+```log
+[1 2 3 4 5]
+[1 2 3 4 5]
+[1 2 3 4 5 6]
+```
+
+Para pegar itens do slice, é da mesma forma que no array, `slice[3]`
+
+Pra incluir outro elemento, também é a mesma forma `slice[3] = 123123`
+
+Porém, não conseguimos fazer isso: `slice[20] = 123123`
+
+Dá esse erro:
+
+```log
+panic: runtime error: index out of range [20] with length 5
+
+goroutine 1 [running]:
+main.main()
+    /tmp/sandbox341066696/prog.go:16 +0x1d7
+
+Program exited.
+```
+
+O slice é feito de arrays, então temos que usar métodos para utilizar o array
+
