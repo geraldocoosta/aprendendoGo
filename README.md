@@ -1336,3 +1336,131 @@ Program exited.
 
 O slice é feito de arrays, então temos que usar métodos para utilizar o array
 
+- Cap. 8 – Agrupamentos de Dados – 3. Slice: for range
+
+o range significa alcance, faixa, extenção, ou seja, ela atravessa toda a extenção do slice
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    slice := []string{"banana", "avocado", "orange"}
+    for indice, valor := range slice {
+        fmt.Printf("No indice %d temos o valor %v\n", indice, valor)
+    }
+}
+```
+
+```log
+No indice 0 temos o valor banana
+No indice 1 temos o valor avocado
+No indice 2 temos o valor orange
+
+Program exited.
+```
+
+Com a função range a gente consegue passar por todos os valores, usando o for no formato acima
+
+Se lembre, não adicione por indice no slice, é meio ruim, pode dar erro, faz isso não
+
+Use a função append
+
+O range retorna duas váriaveis, pra usar só uma, tem que jogar o valor da outra fora com _
+
+- Cap. 8 – Agrupamentos de Dados – 3. Slice: fatiando ou deletando de uma fatia
+
+A sintaxe do slice é essa:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+
+    fatia := sabores[2:3]
+
+    fmt.Println(fatia)
+}
+
+```
+
+Ele funciona da seguinte forma, o primeiro parametro entre colchets, será o indice de um elemento.
+
+O segundo, será o indice do elemento que eu quero que var aquela "fatia", porém esse indice é mais um
+
+No exemplo, vai trazer somente peperoni, pois o indice do peperoni é 2, e o indice de peperoni é 2, +1 fica 3.
+
+Se eu quero pegar a de abacaxi até quatro queijos, seria:
+
+```go
+fatia := sabores[3:5]
+```
+
+lebrando que, o segundo argumento não pode ser menor que o primeiro, pois dá erro
+
+```log
+./prog.go:10:18: invalid slice index: 3 > 2
+```
+
+Outro bom exemplo, que usa o método len
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+
+    fatia := sabores[3:len(sabores)]
+
+    fmt.Println(fatia)
+}
+
+```
+
+Ou também assim:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+
+    fatia := sabores[3:]
+
+    fmt.Println(fatia)
+}
+
+```
+
+Como não temos segundo argumento, automaticamente vai ser até o final
+
+Se não tiver o primeiro argumento, automaticamente vai ser 0
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+
+    fatia := sabores[:4]
+
+    fmt.Println(fatia)
+}
+
+```
+
+É fatiando que se deleta um item de um slice, usando o exemplo anterior, iria ficar assim
+
+```go
+    sabores = append(sabores[:3], sabores[4:]...)
+```
