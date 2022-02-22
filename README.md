@@ -2,7 +2,7 @@
 
 := is a short variable declaration, basicamente faz a operação de declaração e atribuição
 
-Para criar váriaveis com package scope, não podemos usar o short operator, sobrando assim o var ou o const.
+Para criar variáveis com package scope, não podemos usar o short operator, sobrando assim o var ou o const.
 
 ```go
 package main
@@ -20,7 +20,7 @@ func main() {
 
 Ela pode ser mudada pelas funções, qualquer uma no mesmo package (não sei se consigo mudar em packages diferentes)
 
-O short variable declaration pode ser usado se ao menos uma variavel na mesma linha seja declarada, apesar de ser muito feio.
+O short variable declaration pode ser usado se ao menos uma variável na mesma linha seja declarada, apesar de ser muito feio.
 ex:
 
 ```go
@@ -39,8 +39,8 @@ No Go, boolean == bool
 statement -> uma ou mais expressões
 expressão -> qualquer coisa que produz um resultado
 
-variaveis dentro de um code block sao restritas ao codeblock ORIGINAAAAL
-variaveis podem ser declaradas no escopo de package (não me parece boa ideia a não ser que sejam constantes)
+variáveis dentro de um code block sao restritas ao codeblock ORIGINAAAAL
+variáveis podem ser declaradas no escopo de package (não me parece boa ideia a não ser que sejam constantes)
 
 o var funciona em qualquer lugar.
 
@@ -48,19 +48,19 @@ Boas praticas do GO, sempre utilizar :=, a menos que não de, ai usa outras para
 
 TIPOS
 
-Tipo em go são estaticos (tipado)
-se eu declarar a seguinte variavel em um code block
+Tipo em go são estáticos (tipado)
+se eu declarar a seguinte variável em um code block
 
 `x := 10`
 
 Ela é do tipo int, não posso colocar uma string nela, pq da erro
-Go é uma linguagem de tipagem estatica
+Go é uma linguagem de tipagem estática
 
 Para fazer uma declaração com o tipo, é da seguinte forma
 
 `var x int;`
 
-palavra reservada var, nome da variavel, tipo
+palavra reservada var, nome da variável, tipo
 Ao ser declarada da forma do exemplo acima, ela é iniciada com 0.
 
 O tipo geralmente é deduzido pelo compilador, mas pode ser declarado pelo dev, como nos exemplos
@@ -86,7 +86,7 @@ o resultado será
 valor: teste1 tipo: string
 valor: teste2 tipo: float64
 
-Se a variavel for declarada em package scope, só podemos inserir um valor nela em codeblock
+Se a variável for declarada em package scope, só podemos inserir um valor nela em codeblock
 
 exemplo
 
@@ -104,7 +104,7 @@ func main() {
 
 ```
 
-se eu tentar atribuir valor a variavel a nivel de package, da o seguinte erro
+se eu tentar atribuir valor a variável a nível de package, da o seguinte erro
 
 ```log
 ./prog.go:8:1: syntax error: non-declaration statement outside function body
@@ -134,7 +134,7 @@ atribuição -> na analogia, é como receber outro valor na caixa postal
 
 O short variable declaration faz os 3 juntos
 
-valor zero é o valor que se encontra presente em uma váriavel antes de ela ser inicializada pelo dev
+valor zero é o valor que se encontra presente em uma variável antes de ela ser inicializada pelo dev
 
 valores zeros no go
 
@@ -142,9 +142,9 @@ int: 0
 floats: 0.0
 bool: false
 strings: ""
-pointer, funcions, interfaces, slices, channels, maps : nil
+pointer, functions, interfaces, slices, channels, maps : nil
 
-user o := sempre que possivel
+user o := sempre que possível
 use var para package-level scope
 
 Com tipos primitivos, segue exemplo:
@@ -188,7 +188,7 @@ Println
 
 mas antes, sobre string, existem dois tipos de string que podem ser declaradas, interpreted string literals e raw string literals
 
-em ciencia de computação, um literal é uma notação para representar um valor fixo no código fonte
+em ciência de computação, um literal é uma notação para representar um valor fixo no código fonte
 
 Ou seja, um int, um bool, um string são literals
 
@@ -231,15 +231,15 @@ resultado:
 
 oibom dia
 
-Fprint -> É um file print, não necessáriamente um arquivo, pq em go não tem diferença entre colocar bytes em um arquivo ou uma conexão ao servidor, é tudo um writer interface, qualquer coisa que tenha como entrada um writer, pode-se usar o Fprint
+Fprint -> É um file print, não necessariamente um arquivo, pq em go não tem diferença entre colocar bytes em um arquivo ou uma conexão ao servidor, é tudo um writer interface, qualquer coisa que tenha como entrada um writer, pode-se usar o Fprint
 
 E também, print, somente printa na tela
 println, coloca um new line depois do que foi printado
 printf, permite formar o print com algumas coringas
 
-Como criar meu proprio tipo
+Como criar meu próprio tipo
 
-tipos são imutaveis
+tipos são imutáveis
 
 Seguindo o exemplo
 
@@ -265,7 +265,7 @@ o resultado será 0, main.hotdog
 
 Esse hotdog é meu tipo, que tem um tipo subjacente, que vem por trás como base
 
-Quando criamos nossos proprios tipos, podemos trabalhar com eles de forma que com os tipos primitivos nós não conseguimos.
+Quando criamos nossos próprios tipos, podemos trabalhar com eles de forma que com os tipos primitivos nós não conseguimos.
 
 Apesar de hotdog nesse exemplo tenha o tipo subjacente como int, nós não podemos atribuir um int a ele
 
@@ -296,7 +296,7 @@ func main() {
 
 ```
 
-Repare que ocorreu uma conversão. Conseguimos transformar uma variavel do tipo hotdog em int.
+Repare que ocorreu uma conversão. Conseguimos transformar uma variável do tipo hotdog em int.
 (também chamado de casting, ou coercion)
 
 Para converter um valor para o tipo que eu quero, eu insiro i tipo e o valor que eu quero entre parentese, como no exemplo
@@ -318,7 +318,7 @@ func main() {
     fmt.Println(x) // zero value == false
     x = true
     fmt.Println(x) // atribuindo valor
-    x = 10 < 100 // bool como resultado de operadores ralacionais
+    x = 10 < 100 // bool como resultado de operadores relacionais
     fmt.Println(x)
 }
 ```
@@ -339,7 +339,7 @@ dessas mensagens
 on on -> festa
 off off -> a mimir
 
-esses on off, podem ser substituidos por uns e zeros, e serem chamados de BInary digiTS
+esses on off, podem ser substituídos por uns e zeros, e serem chamados de BInary digiTS
 bits =)
 
 Quantificando bits
@@ -350,9 +350,9 @@ Quantificando bits
 1024 mb -> 1 gb
 1024 gb -> tb
 
-Cap 4 aula 3 -> Tipos numericos
+Cap 4 aula 3 -> Tipos numéricos
 
-existem dois tipos numericos principais
+existem dois tipos numéricos principais
 int inteiros
 float ponto flutuante
 
@@ -367,7 +367,7 @@ float ponto flutuante
 
 Não escolhemos com quantos bits vamos trabalhar, depende do computador que está rodando o programa.
 
-Todos os tipos numericos são distintos, menos byte e rune.
+Todos os tipos numéricos são distintos, menos byte e rune.
 
 Para verificar os bits usados por um caractere
 
@@ -434,7 +434,7 @@ Porém, se eu usar a atribuição com ++, ele volta a ser 0.
 
 Cap 4 aula 5 -> Strings
 
-Strings são sequencias de bytes imutaveis.
+Strings são sequencias de bytes imutáveis.
 Slice of byte em go.
 Em go, pode ser feita entre "" ou ``
 
@@ -555,13 +555,13 @@ range em um stream não dá bite por bite, e sim caractere por caractere
 
 no segundo for,ele converte para bite
 
-Cap 4 Aula 6 - Sistemas numericos
+Cap 4 Aula 6 - Sistemas numéricos
 
-Decimal, Númerico, Hexadecimal
+Decimal, numéricos, Hexadecimal
 
 decimal - base 10 - 0-9
-binario - base 2 - 0-1
-hexadeciamal - base 16 - 0-f
+binário - base 2 - 0-1
+hexadecimal - base 16 - 0-f
 
 Vi isso na faculdade, só verificando
 
@@ -593,7 +593,7 @@ resultado
 
 Cap 4 Aula 7 - Constantes (aeeeeee)
 
-Constantes são váriaveis imutaveis, que não pode mudar a instancia nunca
+Constantes são variáveis imutáveis, que não pode mudar a instancia nunca
 
 Podem ou não ser tipada, por exemplo
 
@@ -620,8 +620,8 @@ func main() {
 }
 ```
 
-No momento que o programa roda, e a interação do a recebendo b acontece, a contante b vira um float, antes disso, ela não tem tipo atribuido
-O tipo de uma váriavel é definido em tempo de atribuição.
+No momento que o programa roda, e a interação do a recebendo b acontece, a contante b vira um float, antes disso, ela não tem tipo atribuído
+O tipo de uma variável é definido em tempo de atribuição.
 
 Pode-se declarar constantes assim também
 
@@ -670,13 +670,13 @@ Resultado:
 0 1 2
 ```
 
-Numeros inteiros sucessivos na declaração de constantes, que podem ser usados como float também, pois são constantes
+Números inteiros sucessivos na declaração de constantes, que podem ser usados como float também, pois são constantes
 
 Serve para quando não ligamos para o valor da constante, só queremos que o valor seja diferente das outras (ENUM LIKE?)
 
-É possivel descartar valores usando underline(\_)
+É possível descartar valores usando underline(\_)
 
-Também é possivel fazer isso:
+Também é possível fazer isso:
 
 ```go
 import "fmt"
@@ -705,7 +705,7 @@ Podemos colocar uma formula depois do iota da primeira linha, e o go vai repetir
 
 Cap 4 Aula 9 - Deslocamento de bits
 
-Deslocamento de bites é literalmente deslocar digitos binarios da direita pra esquerda ou da esquerda para a direita
+Deslocamento de bites é literalmente deslocar dígitos binários da direita pra esquerda ou da esquerda para a direita
 
 Como fazer isso?
 
@@ -771,7 +771,7 @@ Dá o seguinte erro
 ./prog.go:10:10: syntax error: var declaration not allowed in for initializer
 ```
 
-Aparentemente, pra váriavel contadora usada em um for, não é aceito a palavra reservada var para inicialização
+Aparentemente, pra variável contadora usada em um for, não é aceito a palavra reservada var para inicialização
 
 O seguinte exemplo funciona:
 
@@ -807,7 +807,7 @@ func main() {
 
 ```
 
-Explicando o exemplo, para funcionar como while, deve ter só um statement, diferente do for normal que tem 3 statements separados por ponto e virgual (;)
+Explicando o exemplo, para funcionar como while, deve ter só um statement, diferente do for normal que tem 3 statements separados por ponto e virgula (;)
 
 Podemos criar uma condição eterna com isso, não precisamos declarar nenhum statement para o for
 
@@ -856,7 +856,7 @@ O modulo (%), também não tinha sido explicado, mas funciona igual as outras li
 - Cap. 6 – Fluxo de Controle – 7. Condicionais: a declaração if
 
 Funciona basicamente como em outras linguagens, porém, a expressão booleana não fica entre parenteses
-Porém, dentro do if, ele aceita short declaration valiable junto com o ifm ou seja
+Porém, dentro do if, ele aceita short declaration variable junto com o if ou seja
 
 ```go
 package main
@@ -889,7 +889,7 @@ Do mesmo jeito de outras linguagens, porém temos isso:
 
 - Cap. 6 – Fluxo de Controle – 9. Condicionais: a declaração switch
 
-Switch no Go, tem sua peculiaridades, por exemplo, não é necessário falar para o go qual váriavel eu estou fazendo o switch
+Switch no Go, tem sua peculiaridades, por exemplo, não é necessário falar para o go qual variável eu estou fazendo o switch
 
 Ex:
 
@@ -912,7 +912,7 @@ func main() {
 
 ```
 
-O switch em go, aceita uma váriavel na frente da palavra reservada switch, que vai comparar o resultado do case com aquele valor.
+O switch em go, aceita uma variável na frente da palavra reservada switch, que vai comparar o resultado do case com aquele valor.
 
 ```go
 package main
@@ -941,7 +941,7 @@ chis é  < 5
 
 Mas como assim ? o x é igual a 10!! Sim meu jovem, porém, o go vai pegar o resultado da expressão do case, e comparar com o valor depois da palavra chave switch, se essa comparação for verdadeira, então ele será o caso correcto.
 
-Basicamenmte, é o equivalente a `if (x < 5) == false`.
+Basicamente, é o equivalente a `if (x < 5) == false`.
 
 Na verdade, quando não colocamos nada, aquilo é simplesmente true. Podemos colocar até string se a gente quiser.
 
@@ -1068,7 +1068,7 @@ Output
 Alfred e zé
 ```
 
-Não irei explicar, tu já desenvolve a alguns anos, foca ai que tu consegue geraldo
+Não irei explicar, tu já desenvolve a alguns anos, foca ai que tu consegue Geraldo
 
 Mas lembrando que, esse switch também aceita essa sintaxe
 
@@ -1143,7 +1143,7 @@ func main() {
 
 Se o switch não der match com nada, aparentemente não dá erro.
 
-A unica parte que não vi, é se podemos usar switch para atribuição de váriavel
+A única parte que não vi, é se podemos usar switch para atribuição de variável
 
 - Cap. 6 – Fluxo de Controle – 11. Operadores lógicos condicionais
 
@@ -1153,9 +1153,9 @@ São o && e o ||, segue o mesmo padrão de outras linguagens.
 
 Existem na GoLang
 
-Array, Slace, Maps, Structs
+Array, Slice, Maps, Structs
 
-Array: Tipo não utilizado tanto no dia a dia, é o bloco fundamental aonde o slice é construido
+Array: Tipo não utilizado tanto no dia a dia, é o bloco fundamental aonde o slice é construído
 
 Exemplo de Array:
 
@@ -1185,7 +1185,7 @@ Resultado
 ```
 
 Array: Uma estrutura de dados, que pode carregar mais de um dado de um tipo, o tamanho de um array deve ser definido antes de utiliza-lo
-Integralmente, o tipo de array contém o tamanho dele, logo na declaração da váriavel, coloca-se o tamanho, e se diz assim: "É um array de 5 ints"
+Integralmente, o tipo de array contém o tamanho dele, logo na declaração da variável, coloca-se o tamanho, e se diz assim: "É um array de 5 ints"
 
 Logo, ao se fazer isso:
 
@@ -1235,7 +1235,7 @@ Resultado
 ./prog.go:10:3: invalid array index 6 (out of bounds for 5-element array)
 ```
 
-Um array de 6 ints e de 5 ints não são compativeis entre si.
+Um array de 6 ints e de 5 ints não são compatíveis entre si.
 
 Funções que podemos utilizar em arrays:
 
@@ -1259,7 +1259,7 @@ func main() {
 
 O bom de saber de array, é saber que não vamos utilizar array, então basicamente é isso, funciona basicamente como no Java.
 
-Arrays são uteis quando precisamos planejar o layout da memoria em detalhes (muito baixo nivel)
+Arrays são uteis quando precisamos planejar o layout da memoria em detalhes (muito baixo nível)
 
 Use SLICE.
 
@@ -1367,7 +1367,7 @@ Se lembre, não adicione por indice no slice, é meio ruim, pode dar erro, faz i
 
 Use a função append
 
-O range retorna duas váriaveis, pra usar só uma, tem que jogar o valor da outra fora com _
+O range retorna duas variáveis, pra usar só uma, tem que jogar o valor da outra fora com _
 
 - Cap. 8 – Agrupamentos de Dados – 3. Slice: fatiando ou deletando de uma fatia
 
@@ -1379,7 +1379,7 @@ package main
 import "fmt"
 
 func main() {
-    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+    sabores := []string{"margarita", "calabresa", "peperoni", "abacaxi", "quatro queijos"}
 
     fatia := sabores[2:3]
 
@@ -1388,7 +1388,7 @@ func main() {
 
 ```
 
-Ele funciona da seguinte forma, o primeiro parametro entre colchets, será o indice de um elemento.
+Ele funciona da seguinte forma, o primeiro parametro entre colchetes, será o indice de um elemento.
 
 O segundo, será o indice do elemento que eu quero que var aquela "fatia", porém esse indice é mais um
 
@@ -1400,7 +1400,7 @@ Se eu quero pegar a de abacaxi até quatro queijos, seria:
 fatia := sabores[3:5]
 ```
 
-lebrando que, o segundo argumento não pode ser menor que o primeiro, pois dá erro
+lembrando que, o segundo argumento não pode ser menor que o primeiro, pois dá erro
 
 ```log
 ./prog.go:10:18: invalid slice index: 3 > 2
@@ -1414,7 +1414,7 @@ package main
 import "fmt"
 
 func main() {
-    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+    sabores := []string{"margarita", "calabresa", "peperoni", "abacaxi", "quatro queijos"}
 
     fatia := sabores[3:len(sabores)]
 
@@ -1431,7 +1431,7 @@ package main
 import "fmt"
 
 func main() {
-    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+    sabores := []string{"margarita", "calabresa", "peperoni", "abacaxi", "quatro queijos"}
 
     fatia := sabores[3:]
 
@@ -1450,7 +1450,7 @@ package main
 import "fmt"
 
 func main() {
-    sabores := []string{"margarita", "calabreza", "peperoni", "abacaxi", "quatro queijos"}
+    sabores := []string{"margarita", "calabresa", "peperoni", "abacaxi", "quatro queijos"}
 
     fatia := sabores[:4]
 
@@ -1476,3 +1476,73 @@ Essa função recebe um slice de um tipo, e vários elementos de outro tipo como
 No exemplo passado, da aula anterior, utilizou os 3 pontos para o go entender que são vários ints.
 
 Os 3 pontos pode ser chamado como unfurl ou enumerations. Basicamente, desenrola os itens do slice e coloca um de cada vez.
+
+- Cap. 8 – Agrupamentos de Dados – 6. Slice: make
+
+Slice são feitos de array
+
+Slices são dinâmicas, ou seja, podem mudar de tamanho
+Sempre que um slice muda de tamanho, um novo array é criado, e os dados são movidos do antigo para o atual
+
+É conveniente mas tem um custo computacional
+
+Para otimizar as coisas, podemos usar o make
+
+`make([]T, len, cap)`
+
+O make nos permite construir um slice que usa um array de 10 elementos, porém com a capacidade de 50 elementos
+
+O slice tem um LENgth
+
+O array por trás tem um CAPacidade
+
+Para verificarmos isso, temos os métodos len(x) e cap (x)
+
+Se eu tiver capacidade no Array que é base para meu slice, e inserir um item novo, o valor será inserido no meu array, e nele será feito um slice que resulta no meu Slice. Se eu não tiver capacidade, um novo array com capacidade maior será criado. Ou seja, aparentemente o Slice é apenas um syntax sugar para arrays.
+
+Para criar um slice com o método make, passando seu tamanho e capacidade
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    slice := make([]int, 5, 10)
+}
+```
+
+O make vai criar o slice com valores defaults, ou seja, coloquei que tenho length de 5, ele vai preencher de 0 os que eu não preencher
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    slice := make([]int, 5, 10)
+    fmt.Println(slice)
+}
+```
+
+```log
+[0 0 0 0 0]
+```
+
+Se eu tenho um slice de cap 5, eu posso colocar valores assim até seu indice 4
+
+```go
+slice[0] = 123
+slice[1] = 123
+slice[2] = 123
+slice[3] = 123
+slice[4] = 123
+```
+
+O sexto, ira dar erro, out of range.
+
+Para adicionar depois do quinto elemento, nesse caso, iremos utilizar o método append
+
+Sobre o Capability, se eu passar do valor de capability que passei no começo, aparentemente esse valor é dobrado, e gerado um novo array de base para o slice.
+
+Se você já sabe com quantos elementos vai trabalhar antes de criar o slice, você já podia criar o slice com um certo tamanho, para que o array de base do slice não seja recriado a todo momento.
