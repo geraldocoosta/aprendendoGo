@@ -1578,3 +1578,39 @@ func main() {
 ```
 
 Reparar como é a declaração `[][]type`.
+
+Cap. 8 – Agrupamentos de Dados – 8. Slice: a surpresa do array subjacente
+
+Cuidado ao usar APPEND, pq ele faz um reslice do array subjacente.
+
+Exemplo:
+
+```go
+import "fmt"
+
+func main() {
+    primeiroSlice := []int{1, 2, 3, 4, 5}
+
+    fmt.Println(primeiroSlice)
+
+    segundoSlice := append(primeiroSlice[:2], primeiroSlice[4:]...)
+
+    fmt.Println(segundoSlice)
+
+    fmt.Println(primeiroSlice)
+}
+```
+
+```log
+[1 2 3 4 5]
+[1 2 5]
+[1 2 5 4 5]
+```
+
+Ou seja, ele modificou o slice de origem, meio que a segundo slice ficou com um referencia dos itens de index 0 até index 3.
+
+Ou seja, o array subjacente do segundoSlice é o mesmo do primeiroSlice, porém, com leg == 3 e o primeiro array com length == 5
+
+Não é útil, mas é perigoso.
+
+Quando for gerar um novo slice a partir de outro, faz um loop for ou modifica a referencia mesmo, mas não cria outro slice a partindo do append.
