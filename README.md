@@ -1546,3 +1546,35 @@ Para adicionar depois do quinto elemento, nesse caso, iremos utilizar o método 
 Sobre o Capability, se eu passar do valor de capability que passei no começo, aparentemente esse valor é dobrado, e gerado um novo array de base para o slice.
 
 Se você já sabe com quantos elementos vai trabalhar antes de criar o slice, você já podia criar o slice com um certo tamanho, para que o array de base do slice não seja recriado a todo momento.
+
+- Cap. 8 – Agrupamentos de Dados – 7. Slice: slice multi-dimensional
+
+Slice dentro de um slice.
+
+Conceito parece ser o mesmo de outras linguagens, porém a sintaxe é a seguinte:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    ss := [][]int{
+        []int{1, 2, 3},
+        []int{4, 5, 6},
+        []int{7, 8, 9},
+    }
+    fmt.Println(ss)
+    fmt.Println(ss[1])
+    fmt.Println(ss[1][1])
+
+}
+```
+
+```log
+[[1 2 3] [4 5 6] [7 8 9]]
+[4 5 6]
+5
+```
+
+Reparar como é a declaração `[][]type`.
