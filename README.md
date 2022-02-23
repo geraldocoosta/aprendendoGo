@@ -1654,3 +1654,32 @@ func main() {
 A sintaxe da declaração é meio estranha, mas tudo bem.
 
 O segundo argumento que a busca de uma chave no map é um ok value, se for true, existe, se for false, não existe.
+
+- Cap. 8 – Agrupamentos de Dados – 10. Maps: range & deletando
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    qualquercoisa := map[int]string{
+        123: "muito legal",
+        456: "not cool",
+        789: "this sucks",
+    }
+
+    for key, value := range qualquercoisa {
+        fmt.Println(key, value)
+    }
+
+}
+```
+
+Range passa por todos os valores do map, padrão
+
+Para deletar, a sintaxe é essa
+
+```go
+delete(variaveldoMap, chaveParaExcluir)
+```
