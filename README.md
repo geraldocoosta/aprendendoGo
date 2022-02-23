@@ -1614,3 +1614,43 @@ Ou seja, o array subjacente do segundoSlice é o mesmo do primeiroSlice, porém,
 Não é útil, mas é perigoso.
 
 Quando for gerar um novo slice a partir de outro, faz um loop for ou modifica a referencia mesmo, mas não cria outro slice a partindo do append.
+
+- Cap. 8 – Agrupamentos de Dados – 9. Maps: introdução
+
+Estrutura de dados key value, com ordem aleatória, porém muito performático
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    amigos := map[string]int{
+        "alfredo": 12312312,
+        "joana":   123123123,
+    }
+    fmt.Println(amigos["joana"])
+
+    amigos["gopher"] = 444444
+    fmt.Println(amigos["joana"])
+
+    gopher := amigos["gopher"]
+    fmt.Println(gopher)
+
+    // se o ok for false, quem eu pesquisei no map não existe
+    fantasma, ok := amigos["fantasma"]
+    fmt.Println(fantasma, ok)
+
+
+    if será, ok :=  amigos["fantasma"]; ok {
+        fmt.Println(será, "existe?")
+    } else {
+        fmt.Println("Não existe", ok)
+    }
+
+}
+```
+
+A sintaxe da declaração é meio estranha, mas tudo bem.
+
+O segundo argumento que a busca de uma chave no map é um ok value, se for true, existe, se for false, não existe.
