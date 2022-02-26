@@ -468,7 +468,7 @@ Resultado
 Também pode ser feito dessa maneira esse loop
 
 ```go
-s := "teste é assim mosmo e é 香 😂"
+s := "teste é assim mesmo e é 香 😂"
 
 
 for _, v := range s {
@@ -995,11 +995,11 @@ func main() {
     z := "alfredo"
 
     switch "zé"{
-        case x: 
+        case x:
             fmt.Println("Rodolfinhooooooo")
-        case y: 
+        case y:
             fmt.Println("Mariaaaaaaaaaaa")
-        case z: 
+        case z:
             fmt.Println("Alfred")
         default:
             fmt.Println("Mas que coisa, parece que nada")
@@ -1023,11 +1023,11 @@ func main() {
     z := "alfredo"
 
     switch "zé"{
-        case x: 
+        case x:
             fmt.Println("Rodolfinhooooooo")
-        case y: 
+        case y:
             fmt.Println("Mariaaaaaaaaaaa")
-        case z: 
+        case z:
             fmt.Println("Alfred")
         default:
             fmt.Println("Mas que coisa, parece que nada")
@@ -1050,9 +1050,9 @@ func main() {
     w := "zé"
 
     switch "zé"{
-        case x, y: 
+        case x, y:
             fmt.Println("Rodolfinhooooooo ou Mariaaaaaa")
-        case z, w: 
+        case z, w:
             fmt.Println("Alfred e zé")
         default:
             fmt.Println("Mas que coisa, parece que nada")
@@ -1080,11 +1080,11 @@ import "fmt"
 func main() {
 
     x := 1
-    
+
     switch {
-        case (x == 4), (x == 3): 
+        case (x == 4), (x == 3):
             fmt.Println("4 ou 3")
-        case (x == 2), (x == 1): 
+        case (x == 2), (x == 1):
             fmt.Println("2 ou 1")
     }
 
@@ -1338,7 +1338,7 @@ O slice é feito de arrays, então temos que usar métodos para utilizar o array
 
 - Cap. 8 – Agrupamentos de Dados – 3. Slice: for range
 
-o range significa alcance, faixa, extenção, ou seja, ela atravessa toda a extenção do slice
+o range significa alcance, faixa, extensão, ou seja, ela atravessa toda a extensão do slice
 
 ```go
 package main
@@ -1388,7 +1388,7 @@ func main() {
 
 ```
 
-Ele funciona da seguinte forma, o primeiro parametro entre colchetes, será o indice de um elemento.
+Ele funciona da seguinte forma, o primeiro parâmetro entre colchetes, será o indice de um elemento.
 
 O segundo, será o indice do elemento que eu quero que var aquela "fatia", porém esse indice é mais um
 
@@ -1809,7 +1809,7 @@ func main() {
         nome  string
         idade int
     }{
-        nome:  "geraldo",
+        nome:  "Geraldo",
         idade: 54,
     }
     fmt.Println(x)
