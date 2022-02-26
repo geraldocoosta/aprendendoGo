@@ -1794,3 +1794,24 @@ pessoa4 := profissional{pessoa{"Vanderlei", 70}, "Politico", 10000}
 Essa é a forma concisa do struct composto
 
 Essa é a [documentação](https://go.dev/ref/spec#Struct_types)
+
+- Cap. 10 – Structs – 4. Structs anônimos
+
+É um struct feito na hora, que não é reutilizável, mas pode ser útil
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := struct {
+        nome  string
+        idade int
+    }{
+        nome:  "geraldo",
+        idade: 54,
+    }
+    fmt.Println(x)
+}
+```
