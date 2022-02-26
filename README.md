@@ -1683,3 +1683,36 @@ Para deletar, a sintaxe é essa
 ```go
 delete(variaveldoMap, chaveParaExcluir)
 ```
+
+- Cap. 10 – Structs – 1. Struct
+
+Struct é um tipo de dado cujo nome vem da palavra inglesa structure, nos permite armazenar dados com nomes diferentes
+
+Exemplo
+
+```go
+package main
+
+import "fmt"
+
+type cliente struct {
+    nome      string
+    sobrenome string
+    fumante   bool
+}
+
+func main() {
+    cliente1 := cliente{
+        nome:      "Geraldo",
+        sobrenome: "Costa",
+        fumante:   true,
+    }
+    cliente2 := cliente{"José", "Oliveira", false}
+    fmt.Println(cliente1)
+    fmt.Println(cliente2)
+}
+
+```
+
+Aparentemente, esses {} depois do nome da estrutura é tipo um construtor
+
