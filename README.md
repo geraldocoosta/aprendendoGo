@@ -1756,3 +1756,41 @@ func main() {
     fmt.Println(pessoa1, pessoa2)
 }
 ```
+
+- Cap. 10 – Structs – 3. Lendo a documentação
+
+Como acessar campos da struct?
+
+```go
+
+func main() {
+    pessoa1 := pessoa{
+        nome:  "Alfredo",
+        idade: 30,
+    }
+    pessoa2 := profissional{
+        pessoa: pessoa{
+            nome:  "Mario",
+            idade: 31,
+        },
+        titulo:  "Pizzaiolo",
+        salario: 2500,
+    }
+    fmt.Println(pessoa1, pessoa2)
+    fmt.Println(pessoa1.idade)
+    fmt.Println(pessoa2.pessoa.nome)
+    fmt.Println(pessoa2.idade)
+}
+```
+
+repare na linha pessoa2.idade. Isso funciona, se não tiver conflito entre a struct de fora e a struct de dentro, o go verifica se a propriedade ta dentro da struct filha. Em go, é dito que o campo foi "promovido" de um subcampo para um campo externo
+
+Como fazer a forma concisa do struct composto?
+
+```go
+pessoa4 := profissional{pessoa{"Vanderlei", 70}, "Politico", 10000}
+```
+
+Essa é a forma concisa do struct composto
+
+Essa é a [documentação](https://go.dev/ref/spec#Struct_types)
