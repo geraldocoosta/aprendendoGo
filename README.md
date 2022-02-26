@@ -1815,3 +1815,72 @@ func main() {
     fmt.Println(x)
 }
 ```
+
+- Cap. 12 – Funções – 1. Sintaxe
+
+As funções servem para abstrair funcionalidades.
+
+Exemplo, o fmt.Println, é uma função do pacote fmt, ele abstrai a funcionalidade de imprimir coisas no output padrão (terminal no caso). Não sei como funciona dentro da função, mas sei como chamar a função, e ela faz o que eu quero por mim.
+
+É muito utilizada pra reutilizar código.
+
+Toda função no go segue a seguinte estrutura
+
+```go
+func (receiver) identifier (parameters) (returns) {code}
+```
+
+func é a palavra chave para declarar uma função, o receiver, identifier, literalmente o nome da função, parameters, o retorno e o code block
+
+Diferença entre parâmetros e argumentos, a declaração da função tem parâmetros, a chamada a uma função tem argumentos.
+
+Se eu tiver mais de um retorno em uma função em go, eu preciso usar os parenteses, se não, pode não utilizar.
+
+Receiver tem a ver com métodos, ou seja, funções que estão linkadas a um objeto.
+
+Quase tudo em Go é *pass by value*, (tem 1 exceção) ou seja, não é que nem java que tem o pass by reference, que você passa a referencia de um objeto para o método (dependendo do parâmetro), o go passa o valor, provavelmente, se quiser passar a referencia, a gente passa o endereço de memoria, like C.
+
+Exemplo de função básica, que aceita argumento e retorna
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println(soma(1, 2))
+}
+
+        // os parâmetros podem ser escritos das seguintes formas
+        //( x int, y int) ou ( x, y int)
+        // a segunda só funciona para o mesmo tipo
+func soma(x, y int) int {
+    return x + y
+}
+```
+
+Exemplo de função com dois retornos, e recebendo um argumento variado, que tem os tres pontos antes do tipo nos parâmetros da função
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    total, quantos := soma(10, 10, 1, 2, 3, 5)
+
+    fmt.Println(total, quantos)
+}
+
+func soma(x ...int) (int, int) {
+    soma := 0
+    for _, v := range x {
+        soma += v
+    }
+    return soma, len(x)
+}
+
+```
+
+O parâmetro variado de um função tem que vir no ultimo parâmetro, se não tivesse essa regra, iria virar uma zona e o compilador talvez ficasse perdido.
