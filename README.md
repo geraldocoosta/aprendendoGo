@@ -1716,3 +1716,43 @@ func main() {
 
 Aparentemente, esses {} depois do nome da estrutura é tipo um construtor
 
+- Cap. 10 – Structs – 2. Structs embutidos
+
+Structs embutidos é um struct dentro de outro struct.
+
+Eu posso ter quantos structs dentro de structs eu quiser.
+
+Exemplo
+
+```go
+package main
+
+import "fmt"
+
+type pessoa struct {
+    nome  string
+    idade int
+}
+
+type profissional struct {
+    pessoa
+    titulo  string
+    salario int
+}
+
+func main() {
+    pessoa1 := pessoa{
+        nome:  "Alfredo",
+        idade: 30,
+    }
+    pessoa2 := profissional{
+        pessoa: pessoa{
+            nome:  "Mario",
+            idade: 31,
+        },
+        titulo:  "Pizzaiolo",
+        salario: 2500,
+    }
+    fmt.Println(pessoa1, pessoa2)
+}
+```
