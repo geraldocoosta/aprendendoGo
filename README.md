@@ -1922,3 +1922,115 @@ Basicamente, é deixar pra última hora. Tendo mais de um defer, acontece o segu
 É bom para organizar código. Exemplo, podemos usar para fechar arquivos ou conexões ao utiliza-los.
 
 Ele é executado no fechamento do code block ou antes do return
+
+- Cap. 12 – Funções – 4. Métodos
+
+Método em go, é um função anexada a um tipo.
+
+```go
+package main
+
+import "fmt"
+
+type pessoa struct {
+    nome  string
+    idade int
+}
+
+func (p pessoa) oibomdia() {
+    fmt.Println(p.nome, "diz bom dia!")
+}
+
+func main() {
+    mauricio := pessoa{"Mauricio", 30}
+    mauricio.oibomdia()
+}
+```
+
+Basicamente a gente liga uma struct a uma função, com o receiver, que recebe uma struct.
+
+O método é uma função especifica para um valor de um tipo, no caso aqui, pra cada valor de pessoa, cada pessoa terá seu método bom dia.
+
+Cap. 12 – Funções – 5. Interfaces & polimorfismo
+
+Em Go, valores podem ter mais de um tipo
+
+Uma interface permite que um valor tenha mais que um tipo
+
+Uma interface é um conjunto de métodos, e todo typo que eu criar e ter esses métodos, vai implementar e ganhar o tipo dessa interface
+
+Polimorfismo (várias formas), tenho a mesma ação pra coisas de tipos distintas. Meio que, tenho uma interface fazerBarulho, e dois tipos que implementam isso, cachorro e gato. Se eu chamar fazerBarulho pra um, ele faz uma coisa, pra outro, faz outra coisa, mas eu chamei fazerBarulho. Então tá ai as várias formas do polimorfismo.
+
+Declaração é ```type nome interface{}```, e dentro disso deve ter métodos.
+
+Exemplos
+
+```go
+package main
+
+import "fmt"
+
+type pessoa struct {
+    nome      string
+    sobrenome string
+    idade     int
+}
+
+type gente interface {
+    oibomdia()
+}
+
+type dentista struct {
+    pessoa
+    dentesarrancados int
+    salário          float64
+}
+
+type arquiteto struct {
+    pessoa
+    tipodeconstrução string
+    tamanhodaloucura string
+}
+
+func (x dentista) oibomdia() {
+    fmt.Println("Meu nome é", x.nome, "e ouve só: Bom dia!")
+}
+
+func (x arquiteto) oibomdia() {
+    fmt.Println("Meu nome é", x.nome, "e ouve só: Bom dia!")
+}
+
+func serhumano(g gente) {
+    g.oibomdia()
+    switch g.(type) {
+    case dentista:
+        fmt.Println("Eu ganho:", g.(dentista).salário)
+
+    case arquiteto:
+        fmt.Println("Eu construo:", g.(arquiteto).tipodeconstrução)
+    }
+}
+
+func main() {
+    dentista1 := dentista{pessoa{"José", "Oliveira", 24}, 24, 5000.0}
+
+    arquiteto1 := arquiteto{pessoa{"Geraldo", "Costa", 24}, "urbana", "bem grande"}
+
+    serhumano(dentista1)
+    serhumano(arquiteto1)
+}
+```
+
+Então saca só, os dois typos, dentista e arquiteto implementam a interface gente, logo, um método que receber gente, também aceita o dentista ou o arquiteto. As vezes então, sem saber você pode estar implementando uma interface.
+
+Reparar que posso ter até mesmo um switch dentro do método que recebe gente, pra verificar que tipo de gente é que eu to passando no parâmetro da chamada da função.
+
+Onde se utiliza?
+
+Área de formas geométricas (gobyexample.com)
+
+Sort
+
+DB
+
+Writer interface: arquivos locais, http request/response
