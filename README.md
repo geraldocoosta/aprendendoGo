@@ -1367,7 +1367,7 @@ Se lembre, não adicione por indice no slice, é meio ruim, pode dar erro, faz i
 
 Use a função append
 
-O range retorna duas variáveis, pra usar só uma, tem que jogar o valor da outra fora com _
+O range retorna duas variáveis, pra usa>
 
 - Cap. 8 – Agrupamentos de Dados – 3. Slice: fatiando ou deletando de uma fatia
 
@@ -1884,3 +1884,41 @@ func soma(x ...int) (int, int) {
 ```
 
 O parâmetro variado de um função tem que vir no ultimo parâmetro, se não tivesse essa regra, iria virar uma zona e o compilador talvez ficasse perdido.
+
+- Cap. 12 – Funções – 2. Desenrolando (enumerando) uma slice
+
+Para receber um slice em um função qu recebe argumento variado, é só desenrolar com o operador (...)
+
+Em um função variada, posso passar zero valores (ter cuidado pra não dar erro)
+
+- Cap. 12 – Funções – 3. Defer
+
+Esse statement pode ser explicado como dar um instrução que vai ser executada na ultima hora
+
+Exemplo
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    defer fmt.Println("com defer, vem primeiro")
+    fmt.Println("sem defer, veio depois ")
+}
+```
+
+Resultado
+
+```log
+sem defer, veio depois
+com defer, vem primeiro
+
+Program exited.
+```
+
+Basicamente, é deixar pra última hora. Tendo mais de um defer, acontece o seguinte comportamento, LIFO. O primeiro, vai ser executado por ultimo.
+
+É bom para organizar código. Exemplo, podemos usar para fechar arquivos ou conexões ao utiliza-los.
+
+Ele é executado no fechamento do code block ou antes do return
