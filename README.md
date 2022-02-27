@@ -2034,3 +2034,24 @@ Sort
 DB
 
 Writer interface: arquivos locais, http request/response
+
+- Cap. 12 – Funções – 6. Funções anônimas
+
+Funções que são declaradas dentro de função que rodam imediatamente após a sua definição.
+
+Funcionam que nem no JavaScript
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 387
+    func(x int) {
+        fmt.Println(x * 12333)
+    }(x)
+}
+```
+
+Geralmente não tem nome, pois não precisarão ser reutilizadas. Também serve para go rotine, aparentemente em concorrência.
