@@ -2055,3 +2055,81 @@ func main() {
 ```
 
 Geralmente não tem nome, pois não precisarão ser reutilizadas. Também serve para go rotine, aparentemente em concorrência.
+
+- Cap. 12 – Funções – 7. Func como expressão
+
+basicamente, é uma função dentro de uma função, que pode ser associada a uma variável
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 387
+    y := func(x int) {
+        fmt.Println(x * 12333)
+    }
+
+    y(x)
+}
+```
+
+- Cap. 12 – Funções – 8. Retornando uma função
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 387
+    y := retornaFuncao()
+
+    fmt.Println(y(x))
+}
+
+func retornaFuncao() func(int) int {
+    return func(x int) int {
+        return x * 12333
+    }
+}
+
+```
+
+Cap. 12 – Funções – 9. Callback
+
+Callback é passar uma função como argumento, essa função ẽ usada dentro de outra função
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    t := somentePares(soma, []int{50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60}...)
+    fmt.Println(t)
+}
+
+func soma(x ...int) int {
+    n := 0
+    for _, v := range x {
+        n += v
+    }
+    return n
+}
+
+func somentePares(f func(x ...int) int, y ...int) int {
+    var slice []int
+    for _, v := range y {
+        if v%2 == 0 {
+            slice = append(slice, v)
+        }
+    }
+    total := f(slice...)
+    return total
+}
+
+```
+
+No exemplo anterior, eu poderia passar para a função somente pares, uma  função que verifica a média, ou subtrai um do outro.
