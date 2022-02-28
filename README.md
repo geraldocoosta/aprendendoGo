@@ -2097,7 +2097,7 @@ func retornaFuncao() func(int) int {
 
 ```
 
-Cap. 12 – Funções – 9. Callback
+- Cap. 12 – Funções – 9. Callback
 
 Callback é passar uma função como argumento, essa função ẽ usada dentro de outra função
 
@@ -2134,7 +2134,7 @@ func somentePares(f func(x ...int) int, y ...int) int {
 
 No exemplo anterior, eu poderia passar para a função somente pares, uma  função que verifica a média, ou subtrai um do outro.
 
-Cap. 12 – Funções – 10. Closure
+- Cap. 12 – Funções – 10. Closure
 
 Closure é quando capturamos o escopo é quando capturamos um escopo(contexto) para utiliza-lo quando quisermos.
 
@@ -2179,4 +2179,50 @@ Basicamente, quando uma função interna consegue acessar o valor de uma variáv
 
 ```text
 Uma closure ocorre normalmente quando uma função é declarada dentro do corpo de outra, e a função interior referencia variáveis locais da função exterior. Em tempo de execução, quando a função exterior é executada, então uma closure é formada, que consiste do código da função interior e referências para quaisquer variáveis no escopo da função exterior que a closure necessita.
+```
+
+- Cap. 12 – Funções – 11. Recursividade
+
+Recursividade é quando algo chama a si mesmo. Muito usado na matemática e na ciência da computação. No escopo do Go, recursividade vai ser uma função chamando ela mesma. Deve ter um statement que com uma regra para sair dessa função, se não rola recursão infinita, dando um stack overflow. Ou também podemos ter recursão de typo, onde um typo tem dentro dele mesmo o próprio tipo.
+
+Uma coisa que tem por definição a própria coisa.
+
+Exemplo no código, o mais clássico
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println(fibonacci(5))
+}
+
+func fibonacci(a int) int {
+    if a == 0 || a == 1 {
+        return 1
+    }
+    return fibonacci(a-1) + fibonacci(a-2)
+}
+```
+
+outro exemplo
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println(fatorial(5))
+}
+
+func fatorial(x int) int {
+    if x == 1 || x == 0 {
+        return 1
+    }
+
+    return x * fatorial(x-1)
+}
 ```
