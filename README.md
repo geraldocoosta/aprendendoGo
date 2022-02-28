@@ -2133,3 +2133,50 @@ func somentePares(f func(x ...int) int, y ...int) int {
 ```
 
 No exemplo anterior, eu poderia passar para a função somente pares, uma  função que verifica a média, ou subtrai um do outro.
+
+Cap. 12 – Funções – 10. Closure
+
+Closure é quando capturamos o escopo é quando capturamos um escopo(contexto) para utiliza-lo quando quisermos.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := i()
+    b := i()
+    fmt.Printf("a is %d\n", a())
+    fmt.Printf("b is %d\n", b())
+    fmt.Printf("a is %d\n", a())
+}
+
+func i() func() int {
+    x := 0
+    return func() int {
+        x++
+        return x
+    }
+}
+```
+
+Resultado
+
+```log
+a is 1
+b is 1
+a is 2
+
+Program exited.
+
+```
+
+Nesse exemplo, podemos verificar que o resultado da chamada da função que a função i retorna, é 1 para a e para b. Nesse caso, o contexto foi mantido para a função quando foi chamada.
+
+Veja que o valor da função exterior fica armazenado, e toda vez que eu chamar a função retornada por i, a função interna tem acesso a aquela variável externa.
+
+Basicamente, quando uma função interna consegue acessar o valor de uma variável de uma função externa e ler ou alterar o seu dado, é uma closure.
+
+```text
+Uma closure ocorre normalmente quando uma função é declarada dentro do corpo de outra, e a função interior referencia variáveis locais da função exterior. Em tempo de execução, quando a função exterior é executada, então uma closure é formada, que consiste do código da função interior e referências para quaisquer variáveis no escopo da função exterior que a closure necessita.
+```
