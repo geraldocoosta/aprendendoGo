@@ -2226,3 +2226,144 @@ func fatorial(x int) int {
     return x * fatorial(x-1)
 }
 ```
+
+- Cap. 14 – Ponteiros – 1. O que são ponteiros?
+
+Todos os valores que armazenamos no computador, vão para a memoria ram do computador, e cada byte da sua memoria ram tem um endereço, esse endereço pode ser acessado, para colocar valor lá dentro, ou até mesmo pegar esse endereço.
+
+Um ponteiro, em C pelo menos, é literalmente uma variável que contém o endereço de memoria de um int, ou um char, ou o char do começo de uma string.
+
+Para mostrar o endereço de memoria de uma variável:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+    fmt.Println(&x)
+}
+```
+
+É usado a notação & (E comercial) antes da variável.
+
+Eu posso colocar o endereço de uma variável em um outra variável, dessa forma:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+
+    y := &x
+    fmt.Println(&x)
+    fmt.Println(y)
+}
+```
+
+Resultando nisso (O endereço varia conforme rodamos o programa)
+
+```log
+0xc000018030
+0xc000018030
+
+Program exited.
+```
+
+Outra coisa que podemos fazer é o dereference de um endereço, ou seja, ir até o endereço e buscar o valor contido lá.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+
+    y := &x
+    fmt.Println(*y)
+}
+```
+
+Resultado
+
+```log
+10
+
+Program exited.
+```
+
+O tipo de uma variável que é contém um endereço é *Type, sou seja, um ponteiro do tipo. Exemplo:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+
+    y := &x
+    fmt.Printf("%T", y)
+}
+```
+
+Resultado
+
+```log
+*int
+Program exited.
+```
+
+Nesse caso, é um *int, ou seja, ponteiro de int.
+
+- Cap. 14 – Ponteiros – 2. Quando usar ponteiros
+
+Ponteiros servem para duas coisas (em go, aparentemente)
+
+A primeira é pra lidar com quantidades grandes de dados e eu não quero ficar copiando pra lá e pra cá, eu deixo o item em um lugar da memoria, e quem tiver que mexer com esse valor vai lá no endereço e mexe com ele lá.
+
+Em go, tudo é pass by value, então, se eu quiser um função que mude o dado original, vou ter que utilizar ponteiro.
+
+Exemplo
+
+```go
+
+package main
+
+import "fmt"
+
+func main() {
+    x := 0
+    estarecebeovalor(x)
+    fmt.Println("valor de x é: ", x)
+
+    estarecebeumponteiro(&x)
+    fmt.Println("valor de x é: ", x)
+
+}
+
+func estarecebeovalor(x int) {
+    x++
+}
+
+func estarecebeumponteiro(x *int) {
+    *x++
+}
+
+```
+
+Veja que a primeira função recebe um valor x, e incrementa, porém, ele só incrementa no scopo da função, o x que ele recebe é uma cópia do x do método main (pass by value)
+
+Na outra função, eu recebo um endereço de memória de um int, ou seja, a referencia a memoria. Quando uso o operador de dereference e incremento, eu estou incrementando com 1 a mesma varável da função main, pois, o endereço de memoria daquela variável foi passado.
+
+Passeio rápido
+
+Para receber um endereço de memoria na função, é usado: ```func algo (x *type)```.
+
+Para pegar um endereço da memoria de uma variável: ```y := &x```
+
+Tendo um endereço de memoria e quero ir até ele: ```*y```
