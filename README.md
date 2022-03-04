@@ -1579,7 +1579,7 @@ func main() {
 
 Reparar como é a declaração `[][]type`.
 
-Cap. 8 – Agrupamentos de Dados – 8. Slice: a surpresa do array subjacente
+- Cap. 8 – Agrupamentos de Dados – 8. Slice: a surpresa do array subjacente
 
 Cuidado ao usar APPEND, pq ele faz um reslice do array subjacente.
 
@@ -1951,7 +1951,7 @@ Basicamente a gente liga uma struct a uma função, com o receiver, que recebe u
 
 O método é uma função especifica para um valor de um tipo, no caso aqui, pra cada valor de pessoa, cada pessoa terá seu método bom dia.
 
-Cap. 12 – Funções – 5. Interfaces & polimorfismo
+- Cap. 12 – Funções – 5. Interfaces & polimorfismo
 
 Em Go, valores podem ter mais de um tipo
 
@@ -2367,3 +2367,40 @@ Para receber um endereço de memoria na função, é usado: ```func algo (x *typ
 Para pegar um endereço da memoria de uma variável: ```y := &x```
 
 Tendo um endereço de memoria e quero ir até ele: ```*y```
+
+- Cap. 16 – Aplicações – 1. Documentação JSON
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "os"
+)
+
+func main() {
+    type ColorGroup struct {
+        ID     int
+        Name   string
+        Colors []string
+    }
+    group := ColorGroup{
+        ID:     1,
+        Name:   "Reds",
+        Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+    }
+    b, err := json.Marshal(group)
+    if err != nil {
+        fmt.Println("error:", err)
+    }
+    os.Stdout.Write(b)
+}
+```
+
+Pra função Marshal do pacote enconding/json funcionar, as iniciais dos campos DEVEM ser maiúsculas
+
+Outra coisa interessante, é que tem sites que traduzem json para uma struct em go.
+
+example:
+https://mholt.github.io/json-to-go/
