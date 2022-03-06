@@ -2402,5 +2402,62 @@ Pra função Marshal do pacote enconding/json funcionar, as iniciais dos campos 
 
 Outra coisa interessante, é que tem sites que traduzem json para uma struct em go.
 
-example:
-https://mholt.github.io/json-to-go/
+[exemplo](https://mholt.github.io/json-to-go)
+
+- Cap. 16 – Aplicações – 3. JSON unmarshal (desordenação)
+
+Para utilizar o unmarshal, temos que usar a função unmarshal com uma cadeia de bytes que tenha o json e um ponteiro pra uma struct que contenha o formato desejado.
+
+Exemplo
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+func main() {
+    type ColorGroup struct {
+        ID     int
+        Name   string
+        Colors []string
+    }
+    group := ColorGroup{
+        ID:     1,
+        Name:   "Reds",
+        Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+    }
+    b, err := json.Marshal(group)
+    if err != nil {
+        fmt.Println("error:", err)
+    }
+    fmt.Println(string(b))
+    fmt.Printf("%T\n", b)
+    var group2 ColorGroup
+    err = json.Unmarshal(b, &group2)
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    fmt.Println(group2)
+}
+```
+
+Resultado
+
+```log
+{"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}
+{1 Reds [Crimson Red Ruby Maroon]}
+Program exited.
+```
+
+Para realizar o unmarshal, precisamos dos campos do json iguais a na struct, logo, pode-se usar o json to go.
+
+Tem diferença do encoder/decoder para marshal/unmarshal.
+
+Para usar o Encoder, você cria um objeto encoder com o método NewEncoder passando um Writer. A partir dai, será retornado um encoder*, que tem métodos para receber uma interface e escrever um json no writer utilizado na criação do encoder.
+
+A diferença de acordo com a teacher é, o marshal joga o resultado em uma variável, o encoder joga direto em uma interface de escrita de algo.
+
