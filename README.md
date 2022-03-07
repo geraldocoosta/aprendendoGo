@@ -2473,3 +2473,37 @@ Tanto um encode quanto um Fprinln aceitam um writer.
 
 O importante aqui é entender que eu posso passar um writer, ou seja, uma struct que implementa a interface write, para várias funções dentro da go lang, inclusive usando rede, como no package http, package dial net.
 
+Cap. 16 – Aplicações – 5. O pacote sort
+
+Ordenando elementos de slices.
+
+Aqui iremos criar nosso tipo, implementar a interface sort.interface e iremos ordenar nosso slice do nosso elemento.
+
+A interface Sort.Interface determina que temos que implementar os métodos Less, Swap e Len, e ordenara com um O(n log n)
+
+Exemplos com funções pré prontas
+
+```go
+package main
+
+import (
+    "fmt"
+    "sort"
+)
+
+func main() {
+    ss := []string{"atirei", "o", "pau", "no", "gato"}
+    sort.Strings(ss)
+    fmt.Println(ss)
+}
+```
+
+Resultado
+
+```log
+[atirei gato no o pau]
+
+Program exited.
+```
+
+Também existe a função sort.Ints, sort.Float64s, faz a mesma coisa
