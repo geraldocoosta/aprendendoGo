@@ -2461,3 +2461,15 @@ Para usar o Encoder, você cria um objeto encoder com o método NewEncoder passa
 
 A diferença de acordo com a teacher é, o marshal joga o resultado em uma variável, o encoder joga direto em uma interface de escrita de algo.
 
+Cap. 16 - Aplicações - 4. A interface Writer
+
+Pra implementar a interface writer é uma interface que tem que implementar o seguinte método.
+
+```go
+func Write(p []byte) (n int, err error);
+```
+
+Tanto um encode quanto um Fprinln aceitam um writer.
+
+O importante aqui é entender que eu posso passar um writer, ou seja, uma struct que implementa a interface write, para várias funções dentro da go lang, inclusive usando rede, como no package http, package dial net.
+
