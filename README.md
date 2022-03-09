@@ -2507,3 +2507,67 @@ Program exited.
 ```
 
 Também existe a função sort.Ints, sort.Float64s, faz a mesma coisa
+
+- Cap. 16 – Aplicações – 6. Customizando o sort
+
+Para ordenar um slice de forma customizável, pode-se usar duas formas a seguir:
+
+```go
+package main
+
+import (
+    "fmt"
+    "sort"
+)
+
+type Pessoa struct {
+    Nome  string
+    Idade int
+}
+
+type PorIdade []Pessoa
+
+func (p PorIdade) Len() int {
+    return len(p)
+}
+
+func (p PorIdade) Swap(a, b int) {
+    p[a], p[b] = p[b], p[a]
+}
+
+func (p PorIdade) Less(a, b int) bool {
+    return p[a].Idade < p[b].Idade
+}
+
+func main() {
+    sp := []Pessoa{
+        Pessoa{"Geraldo", 24},
+        Pessoa{"Stephane", 21},
+        Pessoa{"Ale", 26},
+    }
+    fmt.Println(sp)
+    sort.Sort(PorIdade(sp))
+
+    fmt.Println(sp)
+
+    sort.Slice(sp, func(i, j int) bool {
+        return sp[i].Idade > sp[j].Idade
+    })
+    fmt.Println(sp)
+}
+
+```
+
+Resultado
+
+```log
+[{Geraldo 24} {Stephane 21} {Ale 26}]
+[{Stephane 21} {Geraldo 24} {Ale 26}]
+[{Ale 26} {Geraldo 24} {Stephane 21}]
+
+Program exited.
+```
+
+Em uma forma, a gente só uso um método do package sort chamado slice, passando o array e uma Less function de forma anonima.
+
+A outra forma é implementando a interface sort.Interface no nosso tipo de dados que é um subtipo de um slice do que a gente quer.
