@@ -2571,3 +2571,33 @@ Program exited.
 Em uma forma, a gente só uso um método do package sort chamado slice, passando o array e uma Less function de forma anonima.
 
 A outra forma é implementando a interface sort.Interface no nosso tipo de dados que é um subtipo de um slice do que a gente quer.
+
+Cap. 16 – Aplicações – 7. bcrypt
+
+É uma função de hashing de senha.
+
+Forma de usar no Go
+
+```go
+package main
+
+import (
+    "fmt"
+    "golang.org/x/crypto/bcrypt"
+)
+
+func main() {
+
+    senha := "20julho1980"
+    // usando o bcrypt para gerar um hash de um pass
+    hash, error := bcrypt.GenerateFromPassword([]byte(senha), 14)
+
+    // comparando hash com um slice de bytes, se der erro tá errado
+    err := bcrypt.CompareHashAndPassword(hash, []byte(senha))
+
+    // printando resultados para não dar erro
+    fmt.Println(error, string(hash))
+    fmt.Println(err)
+}
+
+```
