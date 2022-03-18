@@ -2447,6 +2447,7 @@ func main() {
 
 Resultado
 
+
 ```log
 {"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}
 {1 Reds [Crimson Red Ruby Maroon]}
@@ -2601,3 +2602,97 @@ func main() {
 }
 
 ```
+
+- Cap. 18 – Concorrência – 2. Goroutines & WaitGroups
+
+Para fazer duas funções sejam executadas de maneira concorrente com o go, é usado as go routines, que são "threads"
+
+Tem o mesmo conceito de threads, mas não são threads
+
+Threads são linhas de execução, é quando um processo pode se dividir em dois e ser executado  concorrencialmente
+
+O suporte a thread é fornecido pelo OS.
+
+Na pratica, iremos utilizar um ```go func```
+
+Quando colocamos um go na frente de uma função, essa função será usada independentemente
+
+Depois que eu dei um go nessa rotina, não tenho como mexer nela.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    go func1()
+    func2()
+}
+
+func func1() {
+
+    for i := 0; i < 10; i++ {
+        fmt.Println("func1", i)
+    }
+}
+
+func func2() {
+
+    for i := 0; i < 10; i++ {
+        fmt.Println("func2", i)
+    }
+}
+
+```
+
+Nesse exemplo, a func2 printa, e a outra não, pq o código termina antes da func1 executar
+
+Ou seja, nós precisamos esperar ela executar pra depois encerrar o programa
+
+Forma errada de fazer isso: ```sync.WaitGroup```
+
+Esse WaitGroup usa as funções Add pra adicionar go routines, done é utilizada dentro da go routine falando que terminou de executar.
+
+E também usa a função wait, pra falar pro programa esperar pq ta realizando as go rotines.
+
+Vai ficar bem assim o código
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+
+    wg.Add(2)
+
+    go func1()
+    go func2()
+    wg.Wait()
+}
+
+func func1() {
+    for i := 0; i < 1000; i++ {
+        fmt.Println("func1", i)
+    }
+    wg.Done()
+}
+
+func func2() {
+    for i := 0; i < 1000; i++ {
+        fmt.Println("func2", i)
+    }
+    wg.Done()
+
+}
+
+```
+
+Aqui dá pra ver que estão rodando de forma concorrente.
+
+- Cap. 18 – Concorrência – 3. Discussão: Condição de corrida
