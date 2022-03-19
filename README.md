@@ -2662,33 +2662,41 @@ package main
 
 import (
     "fmt"
+    "runtime"
     "sync"
+    "time"
 )
 
 var wg sync.WaitGroup
 
 func main() {
 
+    fmt.Println(runtime.NumCPU())
+    fmt.Println(runtime.NumGoroutine())
+
     wg.Add(2)
 
     go func1()
     go func2()
+
+    fmt.Println(runtime.NumGoroutine())
+
     wg.Wait()
+
 }
 
 func func1() {
     for i := 0; i < 1000; i++ {
-        fmt.Println("func1", i)
+        fmt.Println("func1:", i)
     }
     wg.Done()
 }
 
 func func2() {
     for i := 0; i < 1000; i++ {
-        fmt.Println("func2", i)
+        fmt.Println("func2:", i)
     }
     wg.Done()
-
 }
 
 ```
@@ -2696,3 +2704,34 @@ func func2() {
 Aqui dá pra ver que estão rodando de forma concorrente.
 
 - Cap. 18 – Concorrência – 3. Discussão: Condição de corrida
+
+O que acontece quando fazemos as coisas de uma maneira ruim?
+
+Programar de maneira concorrente é difícil por causa do acesso a variáveis compartilhadas
+
+Em Go a gente compartilha os valores passados através de canais, e esses valores nunca são compartilhados.
+
+Apenas uma goroutine tem acesso ao valor em um dado momento.
+
+Utilizando canais, é impossível ter condição de corrido (documentação que disse)
+
+O que é yield? Yield é a troca de execução de programa que o processador faz internamente. `runtime.Gosched()`
+
+Race condition:
+        *Função 1       var     Função 2*
+         Lendo: 0   →   0
+         Yield          0   →   Lendo: 0
+         var++: 1               Yield
+         Grava: 1   →   1       var++: 1
+                        1   ←   Grava: 1
+         Lendo: 1   ←   1
+         Yield          1   →   Lendo: 1
+         var++: 2               Yield
+         Grava: 2   →   2       var++: 2
+                        2   ←   Grava: 2
+
+E é por isso que vamos ver mutex, atomic e, por fim, channels.
+
+Mutex é uma trava de exclusão, igual o synchronized do java.
+
+Atomic é bem baixo nível, não será utilizado muito.
