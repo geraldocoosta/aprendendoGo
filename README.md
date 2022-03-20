@@ -2776,3 +2776,7 @@ func main() {
 ```
 
 Ao rodar isso, como a variável está sendo compartilhada, varias routines leem e incrementam a partir do valor base. Não vai ser nada confiável utilizar isso.
+
+O go tem uma ferramenta para analisar se o código tem condição de corrida.
+
+`go run -race main.go`
