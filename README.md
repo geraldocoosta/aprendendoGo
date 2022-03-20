@@ -2735,3 +2735,44 @@ E é por isso que vamos ver mutex, atomic e, por fim, channels.
 Mutex é uma trava de exclusão, igual o synchronized do java.
 
 Atomic é bem baixo nível, não será utilizado muito.
+
+- Cap. 18 – Concorrência – 4. Na prática: Condição de corrida
+
+```go
+package main
+
+import (
+    "fmt"
+    "runtime"
+    "sync"
+)
+
+func main() {
+    fmt.Println("CPUs:", runtime.NumCPU())
+    fmt.Println("Goroutines:", runtime.NumGoroutine())
+
+    var wg sync.WaitGroup
+    contador := 0
+    totalGoRoutine := 1000
+
+    wg.Add(totalGoRoutine)
+
+    for i := 0; i < totalGoRoutine; i++ {
+
+        go func() {
+            v := contador
+            runtime.Gosched()
+            v++
+            contador = v
+            wg.Done()
+        }()
+    }
+
+    wg.Wait()
+    fmt.Println("Goroutines:", runtime.NumGoroutine())
+    fmt.Println(contador)
+}
+
+```
+
+Ao rodar isso, como a variável está sendo compartilhada, varias routines leem e incrementam a partir do valor base. Não vai ser nada confiável utilizar isso.
