@@ -2447,7 +2447,6 @@ func main() {
 
 Resultado
 
-
 ```log
 {"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}
 {1 Reds [Crimson Red Ruby Maroon]}
@@ -2788,7 +2787,6 @@ O Mutex é um lock de código, que só deixa uma thread acessar um valor compart
 [Exemplo e explicação do Mutex](https://gobyexample.com/mutexes)
 
 Como isso funciona na pratica? Segue o exemplo
-
 
 ```go
 package main
