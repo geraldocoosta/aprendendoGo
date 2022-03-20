@@ -2832,3 +2832,48 @@ func main() {
 ```
 
 Em go, um trecho de código é lockado usando os métodos Lock e Unlock de um objeto Mutex.
+
+- Cap. 18 – Concorrência – 6. Atomic
+
+É como se fosse o AtomicInteger e suas variáveis no Java, uma variável preparada para ser thread safe, que já realiza o lock e unlock por baixo dos panos.
+
+Exemplo
+
+```go
+package main
+
+import (
+    "fmt"
+    "runtime"
+    "sync"
+    "sync/atomic"
+)
+
+func main() {
+    fmt.Println("CPUs:", runtime.NumCPU())
+    fmt.Println("Goroutines:", runtime.NumGoroutine())
+
+    var wg sync.WaitGroup
+
+    var contador int64 = 0
+    totalGoRoutine := 1000
+
+    wg.Add(totalGoRoutine)
+
+    for i := 0; i < totalGoRoutine; i++ {
+
+        go func() {
+            atomic.AddInt64(&contador, 1)
+            fmt.Println("Contador:\t", atomic.LoadInt64(&contador))
+            wg.Done()
+        }()
+    }
+
+    wg.Wait()
+    fmt.Println("Goroutines:", runtime.NumGoroutine())
+    fmt.Println(contador)
+}
+
+```
+
+Diferente do Java, aqui temos ponteiros, logo, quando usamo o atomic com algum tipo primitivo, declaramos realmente uma variável e usamos o ponteiro para ela, e dentro lá do pacote ele vai cuidar pra mim dos detalhes de mutex.
