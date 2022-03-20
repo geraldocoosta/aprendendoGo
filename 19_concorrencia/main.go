@@ -11,6 +11,8 @@ func main() {
 	fmt.Println("Goroutines:", runtime.NumGoroutine())
 
 	var wg sync.WaitGroup
+	var mu sync.Mutex
+
 	contador := 0
 	totalGoRoutine := 1000
 
@@ -19,11 +21,13 @@ func main() {
 	for i := 0; i < totalGoRoutine; i++ {
 
 		go func() {
+			mu.Lock()
 			v := contador
 			runtime.Gosched()
 			v++
 			contador = v
 			wg.Done()
+			mu.Unlock()
 		}()
 	}
 

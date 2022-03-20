@@ -2780,3 +2780,55 @@ Ao rodar isso, como a variável está sendo compartilhada, varias routines leem 
 O go tem uma ferramenta para analisar se o código tem condição de corrida.
 
 `go run -race main.go`
+
+Cap. 18 – Concorrência – 5. Mutex
+
+O Mutex é um lock de código, que só deixa uma thread acessar um valor compartilhado por vez. (o problema com isso não é o race condition, e sim deadlock se não for bem desenvolvido )
+
+[Exemplo e explicação do Mutex](https://gobyexample.com/mutexes)
+
+Como isso funciona na pratica? Segue o exemplo
+
+
+```go
+package main
+
+import (
+    "fmt"
+    "runtime"
+    "sync"
+)
+
+func main() {
+    fmt.Println("CPUs:", runtime.NumCPU())
+    fmt.Println("Goroutines:", runtime.NumGoroutine())
+
+    var wg sync.WaitGroup
+    var mu sync.Mutex
+
+    contador := 0
+    totalGoRoutine := 1000
+
+    wg.Add(totalGoRoutine)
+
+    for i := 0; i < totalGoRoutine; i++ {
+
+        go func() {
+            mu.Lock()
+            v := contador
+            runtime.Gosched()
+            v++
+            contador = v
+            wg.Done()
+            mu.Unlock()
+        }()
+    }
+
+    wg.Wait()
+    fmt.Println("Goroutines:", runtime.NumGoroutine())
+    fmt.Println(contador)
+}
+
+```
+
+Em go, um trecho de código é lockado usando os métodos Lock e Unlock de um objeto Mutex.
