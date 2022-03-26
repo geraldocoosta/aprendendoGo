@@ -2875,3 +2875,116 @@ func main() {
 ```
 
 Diferente do Java, aqui temos ponteiros, logo, quando usamo o atomic com algum tipo primitivo, declaramos realmente uma variável e usamos o ponteiro para ela, e dentro lá do pacote ele vai cuidar pra mim dos detalhes de mutex.
+
+- Cap. 21 – Canais – 1. Entendendo canais
+
+Conceito único da linguagem go.
+
+Canais é como é chamada a maneira de transmitir dados entre go routines.
+
+Pegamos várias go funcs e transmitimos informação entre elas.
+
+Servem para coordenar, sincronizar, orquestrar e buffering.
+
+Na prática:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int)
+    canal <- 42
+    fmt.Println(<-canal)
+}
+
+```
+
+Isso dá erro, mas tem um exemplo de como fazemos um canal, que é com a expressão `make(chan <type>)`, onde o type é o tipo que desejamos, exemplo, int, Pessoa, bool etc.
+
+**Canais bloqueiam**, canais são como corredores em uma corrida de revesamento, eles devem passar o bastão de maneira sincronizada.
+
+Dá problema se o corredor tentar passar o bastão para o próximo, e esse próximo não estar lá para receber o bastão.
+
+Ou se um corredor ficar esperando o bastão e não tiver ninguém para entregar, também dá problema.
+
+O problema do código acima é que, a função main (que também é uma go routine) bloqueio a execução esperando alguma outra go routine buscar o valor do canal. Como ninguém buscou, ocorre o seguinte erro
+
+```log
+fatal error: all goroutines are asleep - deadlock!
+
+goroutine 1 [chan send]:
+main.main()
+    /tmp/sandbox309324162/prog.go:9 +0x37
+
+Program exited.
+```
+
+**ATENÇÃO**, colocar informação em um canal e retirar informação de um canal deve ser feito de maneira concorrente. Preciso que uma go routine entregue informação pra outra go routine através de um canal, nunca através de uma mesma.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int)
+
+    go func() {
+        canal <- 42
+    }()
+
+    fmt.Println(<-canal)
+
+}
+```
+
+Nesse exemplo, a go routine (func anonima), coloca uma informação no canal, e o go routine main pega a informação do canal. Ou seja, CORRECTO!!!!
+
+Agora, com buffer. Com ele, eu posso fazer que um canal não bloqueia imediatamente, eu posso colocar um valor em um canal e outra go routine pode retirar depois.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int, 1)
+    canal <- 42
+    fmt.Println(<-canal)
+
+}
+
+```
+
+Na func make, onde está o 1, é onde declaro o tamanho do buffer. esse exemplo funciona.
+
+Mas **ATENÇÃO** buffers não bloqueiam imediatamente, mas se colocarmos mais valores no canal do que o que eles aguentam, eles bloqueiam sim.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int, 1)
+    canal <- 42
+    canal <- 43
+    fmt.Println(<-canal)
+
+}
+
+```
+
+```log
+fatal error: all goroutines are asleep - deadlock!
+
+goroutine 1 [chan send]:
+main.main()
+    /tmp/sandbox388642326/prog.go:8 +0x4b
+
+Program exited.
+```
+
+Via de regra, nós não utilizamos buffer. **Não recomendado pra uso**.
