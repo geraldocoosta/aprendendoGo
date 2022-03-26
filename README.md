@@ -3050,3 +3050,121 @@ Não podemos converter um especifico para outro especifico (send para receiver o
 Especifico não pode ser convertido para geral.
 
 O geral não consegue receber um especifico (exemplo `channelBD = channelReceive`). Também não é possivel converter um especifico em um geral (exemplo `channel = (chan int)(channelSender)`)
+
+- Cap. 21 – Canais – 3. Range e close
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    c := make(chan int)
+    go meuloop(100, c)
+    for v := range c {
+        fmt.Println("Recebido do canal", v)
+    }
+
+}
+
+func meuloop(total int, s chan<- int) {
+    for i := 0; i < total; i++ {
+        s <- i
+    }
+    close(s)
+}
+```
+
+Explicando primeiro o range em cima de um canal, basicamente, o range vai ficar eternamente buscando valores colocados no canal e executando algo em cima disso.
+
+Então se liga no passo a passo
+
+1. Função meu loop manda coisas pro canal
+2. Range em cima do canal vai ficar buscando tudo que for enviado para lá
+
+Agora vamos para o close. Pq diamos demos o close na func meuloop?
+
+Então meu chapa raul, temos que falar pro canal que ele não vai receber mais nada, se não o range lá na outra função vai ficar eternamente esperando por isso, ou seja, ERRO!
+
+Então aqui o negocio é, mandei todos os valores que eu tenho que enviar, fecho o canal, e o meu range, lá na outra função consegue ficar feliz e contente sem dar errinhos.
+
+Lembrando que, enquanto for mandado instruções no canal, o que for colocado depois do for range não será executado, só quando o canal for fechado, então cuidado ao colocar mais instruções depois daquele for, talves o que tu colocou nunca seja executado.
+
+[Exemplo disso](https://go.dev/play/p/aze7-yDa3BE)
+
+Exemplo de um programa que não fique bloqueado, produzido por mim mesmo antes de terminar o video
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+    c := make(chan int)
+    wg.Add(2)
+    go meuloop(100, c)
+    go consomeDoCanal(c)
+    fmt.Println("Quando será executado isso?")
+    wg.Wait()
+}
+
+func meuloop(total int, s chan<- int) {
+    for i := 0; i < total; i++ {
+        s <- i
+    }
+    close(s)
+    wg.Done()
+}
+
+func consomeDoCanal(r <-chan int) {
+    for v := range r {
+        fmt.Println("Recebido do canal", v)
+    }
+    wg.Done()
+}
+
+```
+
+Aqui vemos que como as duas funções `meuloop` e `consomeDoCanal` são concorrentes, o meu fmt é executado tranquilo, mas aqui tenho que usar um waitGroup.
+
+Porém, ainda é possivel fazer de um outro jeito que vai dar uma bloqueada, mas não vai precisar do WaitGroup
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    c := make(chan int)
+
+    go meuloop(100, c)
+    consomeDoCanal(c)
+    fmt.Println("Quando será executado isso?")
+
+}
+
+func meuloop(total int, s chan<- int) {
+    for i := 0; i < total; i++ {
+        s <- i
+    }
+    close(s)
+}
+
+func consomeDoCanal(r <-chan int) {
+    for v := range r {
+        fmt.Println("Recebido do canal", v)
+    }
+}
+
+```
+
+Desse jeito funciona sem WaitGroup, mas eu tenho que colocar a minha send channel como go routine, se eu colocar a outra, dá um errinho camarada. xD
+
+Acredito que seja pq, se eu deixar o chan receiver de forma concorrente, ou meuloop entrega mais mensagens do que deveria ou o consome canal tenta buscar mensagens quando ainda não existe nenhuma.
