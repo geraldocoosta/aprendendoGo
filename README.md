@@ -2988,3 +2988,65 @@ Program exited.
 ```
 
 Via de regra, nós não utilizamos buffer. **Não recomendado pra uso**.
+
+- Cap. 21 – Canais – 2. Canais direcionais & Utilizando canais
+
+Canais podem ser direcionais
+
+Podemos ter canais que só recebem informação e outros canais que só enviam informação.
+
+Isso permite que os type-checking mechanisms do compilador façam com que não seja possível, por exemplo, escrever em um canal de leitura.
+
+Canais normalmente são bidirecionais.
+
+Para declarar um send channel é assim: `chan<-` a seta tá direcionando pro canal, ou seja, enviando para o canal
+
+Para declarar um receive channel, é assim: `<-chan`, a seta está partindo do canal para fora, ou seja, canal envia.
+
+Sim, só muda o lugar da seta.
+
+Podemos declarar assim um canal send ou receive `canal := make(<-chan int)` ou `canal := make(chan<- int)`
+
+Exemplo de uso dos canais direcionais
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+
+func main() {
+    canal := make(chan int)
+
+    go send(canal)
+    receive(canal)
+}
+
+func send(s chan<- int) {
+    s <- 42
+}
+
+func receive(r <-chan int) {
+    fmt.Println("O valor recebido do canal foi:", <-r)
+}
+
+```
+
+Basicamente, nos argumentos das funções, eu fiz com que um canal bi-direcionais obtesse o comportamento de um direcional
+
+Exemplos:
+
+[geral pra específico:](https://play.golang.org/p/H1uk4YGMBB)
+[específico pra específico:](https://play.golang.org/p/8JkOnEi7-a)
+[específico pra geral:](https://play.golang.org/p/4sOKuQRHq7)
+[atribuição tipos !=:](https://play.golang.org/p/bG7H6l03VQ)
+
+Basicamente, nos exemplo, podemos ver que podemos fazer a conversão de canal geral para especifico.
+
+Não podemos converter um especifico para outro especifico (send para receiver ou vice versa)
+
+Especifico não pode ser convertido para geral.
+
+O geral não consegue receber um especifico (exemplo `channelBD = channelReceive`). Também não é possivel converter um especifico em um geral (exemplo `channel = (chan int)(channelSender)`)
