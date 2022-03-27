@@ -3411,3 +3411,115 @@ func receive(canalPar <-chan int, canalImpar <-chan int, canalQuit <-chan bool) 
 }
 
 ```
+
+- Cap. 21 – Canais – 6. Convergência
+
+A convergencia é um padrão de programção que envolve pegar dados de vários pontos diferentes e convergir eles em um ponto só.
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+    par := make(chan int)
+    impar := make(chan int)
+    converge := make(chan int)
+    go send(par, impar)
+    go receive(par, impar, converge)
+
+    for v := range converge {
+        fmt.Println(v)
+    }
+}
+
+func send(par, impar chan int) {
+    x := 100
+    for i := 0; i < x; i++ {
+        if i%2 == 0 {
+            par <- i
+            continue
+        }
+        impar <- i
+    }
+    close(par)
+    close(impar)
+}
+
+func receive(par, impar, converge chan int) {
+
+    var wg sync.WaitGroup
+    wg.Add(2)
+
+    go func() {
+        for v := range par {
+            converge <- v
+        }
+        wg.Done()
+    }()
+
+    go func() {
+        for v := range impar {
+            converge <- v
+        }
+        wg.Done()
+    }()
+    wg.Wait()
+    close(converge)
+}
+```
+
+Exemplo de convergencia, junto o resultado de dois canais em um só e utilizo esse canal que junta informações
+
+```go
+package main
+
+import (
+    "fmt"
+    "math/rand"
+    "time"
+)
+
+func main() {
+
+    canalA := trabalho("A")
+    canalB := trabalho("B")
+
+    canalC := converge(canalA, canalB)
+
+    for {
+        fmt.Println(<-canalC)
+    }
+}
+
+func trabalho(s string) chan string {
+    canal := make(chan string)
+    go func(s string, c chan string) {
+        for i := 0; ; i++ {
+            c <- fmt.Sprintf("Função %v diz: %v", s, i*rand.Intn(1e3))
+            time.Sleep(time.Millisecond * time.Duration(rand.Intn(1e3)))
+        }
+    }(s, canal)
+    return canal
+}
+
+func converge(x, y chan string) chan string {
+    novo := make(chan string)
+    go func() {
+        for {
+            novo <- <-x
+        }
+    }()
+    go func() {
+        for {
+            novo <- <-y
+        }
+    }()
+    return novo
+}
+
+
+```
