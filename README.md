@@ -3311,3 +3311,103 @@ Nesse outro exemplo, é igual uma junção dos dois anteriores. A função send 
 O receive, recebe dos 3 canais e mostra os valores, e quando recebe um valor do canalQuit, ele encerra a função.
 
 Por algum motivo, na última execução, rola uns Par: 0 ou Impar: 0, muito estranho, mas será resolvido na próxima aula.
+
+- Cap. 21 – Canais – 5. A expressão comma ok
+
+Ao receber um valor de um canal, podemos fazer o comma ok, como no seguine exemplo
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int)
+    go func() {
+        canal <- 42
+        close(canal)
+    }()
+
+    v, ok := <- canal
+
+    fmt.Println(v,ok)
+}
+```
+
+Se eu não tiver nada no canal, eu recebo false e um valor zero
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int)
+    go func() {
+        canal <- 42
+        close(canal)
+    }()
+
+    v, ok := <- canal
+    fmt.Println(v,ok)
+
+    v, ok = <- canal
+    fmt.Println(v,ok)
+}
+```
+
+```log
+42 true
+0 false
+```
+
+Logo, tenho que verificar se é true o comma ok.
+
+Com o comma ok, podemos corrigir o exercicio da aula passada
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    par := make(chan int)
+    impar := make(chan int)
+    quit := make(chan bool)
+    go send(par, impar, quit)
+    receive(par, impar, quit)
+}
+
+func send(canalPar chan<- int, canalImpar chan<- int, canalQuit chan<- bool) {
+    for i := 1; i < 100; i++ {
+        if i%2 == 0 {
+            canalPar <- i
+            continue
+        }
+        canalImpar <- i
+    }
+    close(canalPar)
+    close(canalImpar)
+    canalQuit <- true
+
+}
+
+func receive(canalPar <-chan int, canalImpar <-chan int, canalQuit <-chan bool) {
+    for {
+        select {
+        case v, ok := <-canalPar:
+            if ok {
+                fmt.Println("Par:", v)
+            }
+        case v, ok := <-canalImpar:
+            if ok {
+                fmt.Println("Impar:", v)
+            }
+        case <-canalQuit:
+            return
+        }
+    }
+
+}
+
+```
