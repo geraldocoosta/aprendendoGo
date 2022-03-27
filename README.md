@@ -3051,6 +3051,16 @@ Especifico não pode ser convertido para geral.
 
 O geral não consegue receber um especifico (exemplo `channelBD = channelReceive`). Também não é possivel converter um especifico em um geral (exemplo `channel = (chan int)(channelSender)`)
 
+Outro exemplo bom para sempre lembrar:
+
+```go
+// Only to receive data
+c1:= make(<- chan bool)
+
+// Only to send data
+c2:= make(chan<-bool
+```
+
 - Cap. 21 – Canais – 3. Range e close
 
 ```go
@@ -3168,3 +3178,136 @@ func consomeDoCanal(r <-chan int) {
 Desse jeito funciona sem WaitGroup, mas eu tenho que colocar a minha send channel como go routine, se eu colocar a outra, dá um errinho camarada. xD
 
 Acredito que seja pq, se eu deixar o chan receiver de forma concorrente, ou meuloop entrega mais mensagens do que deveria ou o consome canal tenta buscar mensagens quando ainda não existe nenhuma.
+
+- Cap. 21 – Canais – 4. Select
+
+Select é como um switch para canais, porém não sequencial
+
+Ele bloqueia até receber um valor que bate com algum caso especificado nele, se eu tiver mais de um caso valido, vai ser escolhido um aleatorio.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    numeroDeExecucoes := 500
+
+    canalA := make(chan int)
+    canalB := make(chan int)
+
+    go func(x int) {
+        for i := 0; i < x; i++ {
+            canalA <- i
+        }
+    }(numeroDeExecucoes / 2)
+
+    go func(x int) {
+        for i := 0; i < x; i++ {
+            canalB <- i
+        }
+    }(numeroDeExecucoes / 2)
+
+    for i := 0; i < numeroDeExecucoes; i++ {
+        select {
+        case v := <-canalA:
+            fmt.Println("Canal A", v)
+        case v := <-canalB:
+            fmt.Println("Canal B", v)
+        }
+    }
+}
+```
+
+Como podemos ver nesse trexo de código, o case vai ter um comportamento pra cada canal, e dá pra receber de vários canais em um mesmo local.
+
+Outro exemplo:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    canal := make(chan int)
+    quit := make(chan int)
+    go enviaParaCanais(canal, quit)
+    recebeValoresNosCanais(canal, quit)
+}
+
+func recebeValoresNosCanais(canal chan int, quit chan int) {
+    for i := 0; i < 50; i++ {
+        fmt.Println("Recebido:", <-canal)
+    }
+    quit <- 0
+}
+
+func enviaParaCanais(canal chan int, quit chan int) {
+    qualquercoisa := 1
+    for {
+        select {
+        case canal <- qualquercoisa:
+            qualquercoisa++
+        case <-quit:
+            return
+        }
+    }
+}
+
+```
+
+Nesse select do envia para canal, e um case ele envia valores para o canal e no segundo case ele recebe de outro canal.
+
+Caso ele receba um valor em quit, ele encerra a função, concluindo o código.
+
+Segue outro exemplo:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    par := make(chan int)
+    impar := make(chan int)
+    quit := make(chan bool)
+    go send(par, impar, quit)
+    receive(par, impar, quit)
+}
+
+func send(canalPar chan<- int, canalImpar chan<- int, canalQuit chan<- bool) {
+    for i := 1; i < 100; i++ {
+        if i%2 == 0 {
+            canalPar <- i
+            continue
+        }
+        canalImpar <- i
+    }
+    close(canalPar)
+    close(canalImpar)
+    canalQuit <- true
+
+}
+
+func receive(canalPar <-chan int, canalImpar <-chan int, canalQuit <-chan bool) {
+    for {
+        select {
+        case v := <-canalPar:
+            fmt.Println("Par:", v)
+        case v := <-canalImpar:
+            fmt.Println("Impar:", v)
+        case <-canalQuit:
+            return
+        }
+    }
+
+}
+
+
+```
+
+Nesse outro exemplo, é igual uma junção dos dois anteriores. A função send envia valores para os 3 canais, numeros pares pro canalPar, impares para o canalImpar e envia valores para o canalQuit para encerrar a função.
+
+O receive, recebe dos 3 canais e mostra os valores, e quando recebe um valor do canalQuit, ele encerra a função.
+
+Por algum motivo, na última execução, rola uns Par: 0 ou Impar: 0, muito estranho, mas será resolvido na próxima aula.
