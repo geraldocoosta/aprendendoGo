@@ -3520,6 +3520,123 @@ func converge(x, y chan string) chan string {
     }()
     return novo
 }
+```
 
+- Cap. 21 – Canais – 7. Divergência
+
+Divergência é padrão de projeto concorrente que pega dados de um canal e enviar para mais de um canal(Ou go funcs pelo que é explicado na aula).
+
+```go
+package main
+
+import (
+    "fmt"
+    "math/rand"
+    "sync"
+    "time"
+)
+
+const numeroCanais = 200
+
+func main() {
+
+    canal1 := make(chan int)
+    canal2 := make(chan int)
+
+    go manda(numeroCanais, canal1)
+    go outra(canal1, canal2)
+
+    for v := range canal2 {
+        fmt.Println(v)
+    }
+}
+
+func manda(n int, canal chan int) {
+    for i := 0; i < n; i++ {
+        canal <- i
+    }
+    close(canal)
+}
+
+func outra(canal1 chan int, canal2 chan int) {
+    var wg sync.WaitGroup
+    wg.Add(numeroCanais)
+    for v := range canal1 {
+        go func(x int) {
+            canal2 <- trabalho(x)
+            wg.Done()
+        }(v)
+    }
+    wg.Wait()
+    close(canal2)
+}
+
+func trabalho(x int) int {
+    time.Sleep(time.Millisecond * 1000)
+    return x
+}
 
 ```
+
+Exemplo acima une convergencia e divergencia
+
+Um stream(channel) vira centenas de go funcs que depois convergem.
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+    "time"
+)
+
+const numeroCanais = 200
+
+func main() {
+
+    canal1 := make(chan int)
+    canal2 := make(chan int)
+    funcoes := 5
+
+    go manda(numeroCanais, canal1)
+    go outra(funcoes, canal1, canal2)
+
+    for v := range canal2 {
+        fmt.Println(v)
+    }
+}
+
+func manda(n int, canal chan int) {
+    for i := 0; i < n; i++ {
+        canal <- i
+    }
+    close(canal)
+}
+
+func outra(funcoes int, canal1 chan int, canal2 chan int) {
+    var wg sync.WaitGroup
+    wg.Add(funcoes)
+    for i := 0; i < funcoes; i++ {
+        go func() {
+            for v := range canal1 {
+                canal2 <- trabalho(v)
+            }
+            wg.Done()
+        }()
+    }
+    wg.Wait()
+    close(canal2)
+
+}
+
+func trabalho(x int) int {
+    time.Sleep(time.Millisecond * 1000)
+    return x
+}
+
+```
+
+Nesse exemplo, eu não quero uma go func pra cada item que sai do meu canal, e sim 10 funções que trabalham de maneira concorrente.
+
+Comparando o primeiro exemplo com o segundo, enquanto o segundo abre várias go funcs quase que ao mesmo tempo, no segundo limitamos quantas go funcs iremos abrir, tendo blocos de trabalho sendo feitos, no caso, vai demorar mais tempo, mas vai usar menos memoria.
