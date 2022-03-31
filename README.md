@@ -3640,3 +3640,37 @@ func trabalho(x int) int {
 Nesse exemplo, eu não quero uma go func pra cada item que sai do meu canal, e sim 10 funções que trabalham de maneira concorrente.
 
 Comparando o primeiro exemplo com o segundo, enquanto o segundo abre várias go funcs quase que ao mesmo tempo, no segundo limitamos quantas go funcs iremos abrir, tendo blocos de trabalho sendo feitos, no caso, vai demorar mais tempo, mas vai usar menos memoria.
+
+Cap. 21 – Canais – 8. Context
+
+Context é uma feature nova da linguagem.
+
+Pra que serve? Imagina que temos um site, e meu consumidor digitou uma procura. O meu banco de dados é fragmentado. Quando o usuário deu search, eu disparo várias go routines, uma pra cada tabela e a medida que as go routines completam a execução, eu obtenho os resultados.
+
+Mas imagina que o usuário clicou no primeiro resultado, e não precisamos mais das outras go routines. Seria legal eu poder matar as go routines. Eu posso matar elas e economizar memoria e processamento.
+
+Esse é um dos motivos da existencia do package context, que permite a troca de mensagens entre go routines.
+
+[Link de um post do blog do go explicando mais sobre context](https://go.dev/blog/context)
+
+[Documentação](https://pkg.go.dev/context)
+
+Exemplos (Todd):
+
+- Analisando:
+  - Background: <https://play.golang.org/p/cByXyrxXUf>
+    - WithCancel: <https://play.golang.org/p/XOknf0aSpx>
+    - Função Cancel: <https://play.golang.org/p/UzQxxhn_fm>
+  - Exemplos práticos:
+    - func WithCancel: <https://play.golang.org/p/Lmbyn7bO7e>
+    - func WithCancel: <https://play.golang.org/p/wvGmvMzIMW>
+    - func WithDeadline: <https://play.golang.org/p/Q6mVdQqYTt>
+    - func WithTimeout: <https://play.golang.org/p/OuES9sP_yX>
+    - func WithValue: <https://play.golang.org/p/8JDCGk1K4P>
+
+- Destaques:
+  - ctx := context.Background
+  - ctx, cancel = context.WithCancel(context.Background)
+  - goroutine: select case ←ctx.Done(): return; default: continua trabalhando.
+  - check ctx.Err();
+  - Tambem tem WithDeadline/Timeout
