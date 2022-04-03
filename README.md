@@ -3759,3 +3759,186 @@ func main() {
 Criado o arquivo no exemplo anterior a esse, nesse, eu busco o arquivo e verifico se houve erros.
 
 Se não tiver erros, simplemente irei mostrar na tela os nomes.
+
+- Cap. 23 – Tratamento de Erros – 3. Print & Log
+
+- Opções:
+  - fmt.Println() → stdout
+  - log.Println() → timestamp + pode-se determinar onde o erro ficará logado
+  - log.Fatalln() → os.Exit(1) sem defer
+  - log.Panicln() → println + panic → funcões em defer rodam; dá pra usar recover
+  - panic()
+
+Recomendação: use log.
+
+[Documentação panic](https://pkg.go.dev/builtin#panic)
+
+Exemplos
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    _, err := os.Open("no-file.txt")
+    if err != nil {
+        fmt.Println("err happened", err)
+        //        log.Println("err happened", err)
+        //        log.Fatalln(err)
+        //        panic(err)
+    }
+}
+
+// Println formats using the default formats for its operands and writes to standard output.
+```
+
+```go
+package main
+
+import (
+    "log"
+    "os"
+)
+
+func main() {
+    _, err := os.Open("no-file.txt")
+    if err != nil {
+        //        fmt.Println("err happened", err)
+        log.Println("err happened", err)
+        //        log.Fatalln(err)
+        //        panic(err)
+    }
+}
+
+/*
+Package log implements a simple logging package ... writes to standard error and prints the date and time of each logged message ...
+*/
+
+// log.Println calls Output to print to the standard logger. Arguments are handled in the manner of fmt.Println.
+```
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+)
+
+func main() {
+    f, err := os.Create("log.txt")
+    if err != nil {
+        fmt.Println(err)
+    }
+    defer f.Close()
+    log.SetOutput(f)
+
+    f2, err := os.Open("no-file.txt")
+    if err != nil {
+        //        fmt.Println("err happened", err)
+        log.Println("err happened", err)
+        //        log.Fatalln(err)
+        //        panic(err)
+    }
+    defer f2.Close()
+
+    fmt.Println("check the log.txt file in the directory")
+}
+
+// Println calls Output to print to the standard logger. Arguments are handled in the manner of fmt.Println.
+```
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+)
+
+func main() {
+    defer foo()
+    _, err := os.Open("no-file.txt")
+    if err != nil {
+        //        fmt.Println("err happened", err)
+        //        log.Println("err happened", err)
+        log.Fatalln(err)
+        //        panic(err)
+    }
+}
+
+func foo() {
+    fmt.Println("When os.Exit() is called, deferred functions don't run")
+}
+
+/*
+... the Fatal functions call os.Exit(1) after writing the log message ...
+*/
+
+// Fatalln is equivalent to Println() followed by a call to os.Exit(1).
+```
+
+```go
+package main
+
+import (
+    "log"
+    "os"
+)
+
+func main() {
+    _, err := os.Open("no-file.txt")
+    if err != nil {
+        //        fmt.Println("err happened", err)
+        //        log.Println("err happened", err)
+        //        log.Fatalln(err)
+        log.Panicln(err)
+        //        panic(err)
+    }
+}
+
+/*
+Panicln is equivalent to Println() followed by a call to panic().
+*/
+
+// Fatalln is equivalent to Println() followed by a call to os.Exit(1).
+```
+
+```go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    _, err := os.Open("no-file.txt")
+    if err != nil {
+        //        fmt.Println("err happened", err)
+        //        log.Println("err happened", err)
+        //        log.Fatalln(err)
+        //        log.Panicln(err)
+        panic(err)
+    }
+}
+
+// http://godoc.org/builtin#panic
+```
+
+Fatalln = puxar o fio da tomada, programa para de uma vez bruscamente. Exit code status = 1
+
+Panicln = para o programa graciosamente, rodando os deffers. Exit code status = 2
+
+Com o panic, eu posso usar o recover para tratar o erro.
+
+Usando as funcs que está dentro do pacote log, podemos settar um arquivo de log, ou qualquer output que quisermos.
+
+Usando as funcs que estão no pacote log, é logado a data e hora do error.
+
+É recomendado usar as funções log.Println(), log.Fatalln(), log.Panicln() e log.SetOutput() para logar os erros.
