@@ -3674,3 +3674,88 @@ Exemplos (Todd):
   - goroutine: select case ←ctx.Done(): return; default: continua trabalhando.
   - check ctx.Err();
   - Tambem tem WithDeadline/Timeout
+
+Cap. 23 – Tratamento de Erros – 1. Entendendo erros
+
+Em go, não tem exceções.
+
+[Faq sobre por que não ter exceções](https://go.dev/doc/faq#exceptions)
+
+Existe um type error.
+
+Na opinião dos criadores, dessa forma é mais fácil lidar com erros (sem try - catch - finally)
+
+[Esse é o type error](https://pkg.go.dev/builtin#error)
+
+Basicamente, o type error é uma interface que tem um método Error que retorna uma string.
+
+[Package Errors](https://pkg.go.dev/errors)
+
+Essa interface pode criar erros.
+
+É importante ter o hábito de tratar error imediatamente. Não é bom deixar o erro para tratar na função.
+
+- Cap. 23 – Tratamento de Erros – 2. Verificando erros
+
+Para verificar error, seguimos esse [exemplo](./23_errors/0/main.go)
+
+```go
+package main
+
+import (
+    "fmt"
+    "io"
+    "os"
+    "strings"
+)
+
+func main() {
+    f, err := os.Create("names.txt")
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    defer f.Close()
+
+    r := strings.NewReader("James Bond")
+
+    io.Copy(f, r)
+}
+```
+
+Esse exemplo é muito simples, somente cria um arquivo e copia o texto "James Bond" nele.
+
+Prestar atenção na verificação de erros.
+
+Outro exemplo
+
+```go
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+    "os"
+)
+
+func main() {
+    f, err := os.Open("names.txt")
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    defer f.Close()
+
+    bs, err := ioutil.ReadAll(f)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+
+    fmt.Println(string(bs))
+}
+```
+
+Criado o arquivo no exemplo anterior a esse, nesse, eu busco o arquivo e verifico se houve erros.
+
+Se não tiver erros, simplemente irei mostrar na tela os nomes.
