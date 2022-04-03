@@ -3942,3 +3942,47 @@ Usando as funcs que está dentro do pacote log, podemos settar um arquivo de log
 Usando as funcs que estão no pacote log, é logado a data e hora do error.
 
 É recomendado usar as funções log.Println(), log.Fatalln(), log.Panicln() e log.SetOutput() para logar os erros.
+
+- Cap. 23 – Tratamento de Erros – 4. Recover
+
+[Post sobre defer, panic e recover](https://go.dev/blog/defer-panic-and-recover)
+
+Exemplo:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    f()
+    fmt.Println("Returned normally from f.")
+}
+
+func f() {
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Println("Recovered in f", r)
+        }
+    }()
+    fmt.Println("Calling g.")
+    g(0)
+    fmt.Println("Returned normally from g.")
+}
+
+func g(i int) {
+    if i > 3 {
+        fmt.Println("Panicking!")
+        panic(fmt.Sprintf("%v", i))
+    }
+    defer fmt.Println("Defer in g", i)
+    fmt.Println("Printing in g", i)
+    g(i + 1)
+}
+```
+
+O recover é chamado para tratar um statement que pode lançar um panic.
+
+Basicamente, é uma função que aparentemente captura um panic, e faz com que a função continue normalmente.
+
+É usado sendo chamado em uma função defer e para a sequencia de panic restaurando a execução normal. O valor retornado pelo recover vai ser o valor passado para o panic.
