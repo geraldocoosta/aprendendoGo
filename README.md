@@ -3986,3 +3986,159 @@ O recover é chamado para tratar um statement que pode lançar um panic.
 Basicamente, é uma função que aparentemente captura um panic, e faz com que a função continue normalmente.
 
 É usado sendo chamado em uma função defer e para a sequencia de panic restaurando a execução normal. O valor retornado pelo recover vai ser o valor passado para o panic.
+
+Cap. 23 – Tratamento de Erros – 5. Erros com informações adicionais
+
+Para que nossas funções retornem erros customizados, podemos utilizar:
+
+- Formas de utilizar
+  - return errors.New()
+  - return fmt.Errorf() ← tem um errors.New() embutido, olha na fonte!
+
+[Pacote de erros](https://golang.org/pkg/builtin/#error)
+
+```go
+package main
+
+import (
+    "errors"
+    "log"
+    "math"
+)
+
+func main() {
+    _, err := sqrt(-10)
+    if err != nil {
+        log.Fatalln(err)
+    }
+}
+
+func sqrt(f float64) (float64, error) {
+    if f < 0 {
+        return 0, errors.New("norgate math: square root of negative number")
+    }
+    return math.Sqrt(f), nil
+}
+
+```
+
+```go
+
+package main
+
+import (
+    "errors"
+    "fmt"
+    "log"
+)
+
+var ErrNorgateMath = errors.New("norgate math: square root of negative number")
+
+func main() {
+    fmt.Printf("%T\n", ErrNorgateMath)
+    _, err := sqrt(-10)
+    if err != nil {
+        log.Fatalln(err)
+    }
+}
+
+func sqrt(f float64) (float64, error) {
+    if f < 0 {
+        return 0, ErrNorgateMath
+    }
+    return 42, nil
+}
+
+// see use of errors.New in standard library:
+// http://golang.org/src/pkg/bufio/bufio.go
+// http://golang.org/src/pkg/io/io.go
+```
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+)
+
+func main() {
+    _, err := sqrt(-10.23)
+    if err != nil {
+        log.Fatalln(err)
+    }
+}
+
+func sqrt(f float64) (float64, error) {
+    if f < 0 {
+        return 0, fmt.Errorf("norgate math again: square root of negative number: %v", f)
+    }
+    return 42, nil
+}
+```
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+)
+
+func main() {
+    _, err := sqrt(-10.23)
+    if err != nil {
+        log.Fatalln(err)
+    }
+}
+
+func sqrt(f float64) (float64, error) {
+    if f < 0 {
+        ErrNorgateMath := fmt.Errorf("norgate math again: square root of negative number: %v", f)
+        return 0, ErrNorgateMath
+    }
+    return 42, nil
+}
+```
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+)
+
+type norgateMathError struct {
+    lat  string
+    long string
+    err  error
+}
+
+func (n norgateMathError) Error() string {
+    return fmt.Sprintf("a norgate math error occured: %v %v %v", n.lat, n.long, n.err)
+}
+
+func main() {
+    _, err := sqrt(-10.23)
+    if err != nil {
+        log.Println(err)
+    }
+}
+
+func sqrt(f float64) (float64, error) {
+    if f < 0 {
+        nme := fmt.Errorf("norgate math redux: square root of negative number: %v", f)
+        return 0, norgateMathError{"50.2289 N", "99.4656 W", nme}
+    }
+    return 42, nil
+}
+
+// see use of structs with error type in standard library:
+//
+// http://golang.org/pkg/net/#OpError
+// http://golang.org/src/pkg/net/dial.go
+// http://golang.org/src/pkg/net/net.go
+//
+// http://golang.org/src/pkg/encoding/json/decode.go
+```
