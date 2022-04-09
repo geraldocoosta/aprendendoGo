@@ -1,4 +1,4 @@
-module github.com/geraldocoosta/errors
+module github.com/geraldocoosta/go-exercicio
 
 go 1.18
 
