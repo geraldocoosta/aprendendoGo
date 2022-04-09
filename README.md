@@ -4142,3 +4142,28 @@ func sqrt(f float64) (float64, error) {
 //
 // http://golang.org/src/pkg/encoding/json/decode.go
 ```
+
+- Cap. 25 – Documentação – 2. go doc
+
+go doc é um comando na linha de comando
+
+basicamente mostra a documentação de um package ou função ou constante ou qualquer coisa
+
+- go help doc
+- go doc demonstra a documentação de um package, const, func, type, var, método, etc.
+- go doc aceita zero, um, ou dois argumentos:
+    - zero: demonstra a documentação do package do diretório atual
+    - um: toma argumentos nos padrões abaixo
+        - go doc (pkg)
+        - go doc (sym)[.(method)]
+        - go doc [(pkg).](sym)[.(method)]
+        - go doc [(pkg).][(sym).](method)
+    - dois: o primeiro argumento deve ser o nome do package
+        - go doc (pkg) (sym)[.(method)]
+
+Cap. 25 – Documentação – 3. godoc
+
+- godoc extrai e gera documentação de programas em Go. Funciona de duas maneiras:
+    - Sem o flag http é um comando normal, mostra a documentação no stdout e é isso aí. Pode conter o flag src, que mostra o código fonte.
+    - Com o flag http roda um servidor web local e mostra a documentação como página web.
+- Exemplo: godoc -http=:8080 → http://localhost:8080/
