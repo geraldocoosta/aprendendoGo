@@ -2461,7 +2461,7 @@ Para usar o Encoder, você cria um objeto encoder com o método NewEncoder passa
 
 A diferença de acordo com a teacher é, o marshal joga o resultado em uma variável, o encoder joga direto em uma interface de escrita de algo.
 
-Cap. 16 - Aplicações - 4. A interface Writer
+- Cap. 16 - Aplicações - 4. A interface Writer
 
 Pra implementar a interface writer é uma interface que tem que implementar o seguinte método.
 
@@ -2473,7 +2473,7 @@ Tanto um encode quanto um Fprinln aceitam um writer.
 
 O importante aqui é entender que eu posso passar um writer, ou seja, uma struct que implementa a interface write, para várias funções dentro da go lang, inclusive usando rede, como no package http, package dial net.
 
-Cap. 16 – Aplicações – 5. O pacote sort
+- Cap. 16 – Aplicações – 5. O pacote sort
 
 Ordenando elementos de slices.
 
@@ -2572,7 +2572,7 @@ Em uma forma, a gente só uso um método do package sort chamado slice, passando
 
 A outra forma é implementando a interface sort.Interface no nosso tipo de dados que é um subtipo de um slice do que a gente quer.
 
-Cap. 16 – Aplicações – 7. bcrypt
+- Cap. 16 – Aplicações – 7. bcrypt
 
 É uma função de hashing de senha.
 
@@ -2780,7 +2780,7 @@ O go tem uma ferramenta para analisar se o código tem condição de corrida.
 
 `go run -race main.go`
 
-Cap. 18 – Concorrência – 5. Mutex
+- Cap. 18 – Concorrência – 5. Mutex
 
 O Mutex é um lock de código, que só deixa uma thread acessar um valor compartilhado por vez. (o problema com isso não é o race condition, e sim deadlock se não for bem desenvolvido )
 
@@ -3641,7 +3641,7 @@ Nesse exemplo, eu não quero uma go func pra cada item que sai do meu canal, e s
 
 Comparando o primeiro exemplo com o segundo, enquanto o segundo abre várias go funcs quase que ao mesmo tempo, no segundo limitamos quantas go funcs iremos abrir, tendo blocos de trabalho sendo feitos, no caso, vai demorar mais tempo, mas vai usar menos memoria.
 
-Cap. 21 – Canais – 8. Context
+- Cap. 21 – Canais – 8. Context
 
 Context é uma feature nova da linguagem.
 
@@ -3675,7 +3675,7 @@ Exemplos (Todd):
   - check ctx.Err();
   - Tambem tem WithDeadline/Timeout
 
-Cap. 23 – Tratamento de Erros – 1. Entendendo erros
+- Cap. 23 – Tratamento de Erros – 1. Entendendo erros
 
 Em go, não tem exceções.
 
@@ -3987,7 +3987,7 @@ Basicamente, é uma função que aparentemente captura um panic, e faz com que a
 
 É usado sendo chamado em uma função defer e para a sequencia de panic restaurando a execução normal. O valor retornado pelo recover vai ser o valor passado para o panic.
 
-Cap. 23 – Tratamento de Erros – 5. Erros com informações adicionais
+- Cap. 23 – Tratamento de Erros – 5. Erros com informações adicionais
 
 Para que nossas funções retornem erros customizados, podemos utilizar:
 
@@ -4161,9 +4161,27 @@ basicamente mostra a documentação de um package ou função ou constante ou qu
     - dois: o primeiro argumento deve ser o nome do package
         - go doc (pkg) (sym)[.(method)]
 
-Cap. 25 – Documentação – 3. godoc
+- Cap. 25 – Documentação – 3. godoc
 
 - godoc extrai e gera documentação de programas em Go. Funciona de duas maneiras:
     - Sem o flag http é um comando normal, mostra a documentação no stdout e é isso aí. Pode conter o flag src, que mostra o código fonte.
     - Com o flag http roda um servidor web local e mostra a documentação como página web.
 - Exemplo: godoc -http=:8080 → http://localhost:8080/
+
+- Cap. 25 – Documentação – 5. Escrevendo Documentação
+
+- Documentação é uma parte extremamente importante de fazer com que software seja acessível e sustentável.
+- Documentação deve ser bem escrita e correta, mas tambem fácil de escrever e manter.
+- Deve ser acoplada com o código e evoluir junto com este. Quanto mais fácil for para os programadores criarem boa documentação... melhor fica pra todos os envolvidos.
+- godoc:
+    - Analisa código fonte em Go, incluindo comentários, e gera documentação em HTML ou texto
+    - O resultado é uma documentação firmemente atrelada ao código que documenta.
+    - Por exemplo, na interface web de godoc pode-se navegar da documentação à implementação de um código com apenas um clique.
+    - https://go.dev/blog/godoc
+- Na prática:
+    - Para documentar um tipo, uma variável, uma constante, ou um pacote, escreva um comentário imediatamente antes de sua declaração, sem linhas em branco
+    - Comece a frase com o nome do elemento. No caso de pacotes, a primeira linha aparece no "package list."
+    - Caso esteja escrevendo bastante documentação, utilize um arquivo doc.go. Exemplo: package fmt.
+- A melhor parte dessa abordagem minimalista é que é super fácil de usar. Como resultado, muita coisa em Go, incluindo toda a standard library, já segue estas convenções.
+- Outro exemplo: errors package.
+- Código: https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/25_escrevendo-documentacao
