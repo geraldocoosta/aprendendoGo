@@ -4306,3 +4306,11 @@ func ExampleSoma() {
 ```
 
 Esse example além de testar, também gera documentação, bem legal.
+
+- Cap. 27 – Testes & Benchmarks – 4. go fmt, govet e golint
+
+gofmt: formata o código
+
+go vet: correctness → procura constructs suspeitos
+
+golint: suggestions → procura coding style ruim
