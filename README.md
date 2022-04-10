@@ -4156,12 +4156,12 @@ go doc demonstra a documentação de um package, const, func, type, var, método
 - go doc aceita zero, um, ou dois argumentos:
   - zero: demonstra a documentação do package do diretório atual
   - um: toma argumentos nos padrões abaixo
-    - go doc (pkg)
-    - go doc (sym)[.(method)]
-    - go doc [(pkg).](sym)[.(method)]
-    - go doc [(pkg).][(sym).](method)
+    - `go doc (pkg)`
+    - `go doc (sym)[.(method)]`
+    - `go doc [(pkg).](sym)[.(method)]`
+    - `go doc [(pkg).][(sym).](method)`
   - dois: o primeiro argumento deve ser o nome do package
-    - go doc (pkg) (sym)[.(method)]
+    - `go doc (pkg) (sym)[.(method)]`
 
 - Cap. 25 – Documentação – 3. godoc
 
@@ -4170,7 +4170,7 @@ godoc extrai e gera documentação de programas em Go. Funciona de duas maneiras
 - Sem o flag http é um comando normal, mostra a documentação no stdout e é isso aí. Pode conter o flag src, que mostra o código fonte.
 - Com o flag http roda um servidor web local e mostra a documentação como página web.
 
-Exemplo: godoc -http=:8080 → http://localhost:8080/
+Exemplo: godoc -http=:8080 → <http://localhost:8080/>
 
 - Cap. 25 – Documentação – 5. Escrevendo Documentação
 
@@ -4184,7 +4184,7 @@ Deve ser acoplada com o código e evoluir junto com este. Quanto mais fácil for
   - Analisa código fonte em Go, incluindo comentários, e gera documentação em HTML ou texto
   - O resultado é uma documentação firmemente atrelada ao código que documenta.
   - Por exemplo, na interface web de godoc pode-se navegar da documentação à implementação de um código com apenas um clique.
-  - https://go.dev/blog/godoc
+  - <https://go.dev/blog/godoc>
 
 - Na prática:
   - Para documentar um tipo, uma variável, uma constante, ou um pacote, escreva um comentário imediatamente antes de sua declaração, sem linhas em branco
@@ -4195,7 +4195,7 @@ A melhor parte dessa abordagem minimalista é que é super fácil de usar. Como 
 
 Outro exemplo: errors package.
 
-Código: https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/25_escrevendo-documentacao
+Código: <https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/25_escrevendo-documentacao>
 
 - Cap. 27 – Testes & Benchmarks – 1. Introdução
 
@@ -4255,7 +4255,7 @@ Para visualizar seu exemplo na documentação, fazemos o de sempre: `godoc -http
 
 Tanto para testes quanto para exemplos podemos utilizar: go test ./...
 
-Mais: https://blog.golang.org/examples
+Mais: <https://blog.golang.org/examples>
 
 ```go
 type test struct {
