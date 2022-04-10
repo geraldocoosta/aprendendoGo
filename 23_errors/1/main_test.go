@@ -42,3 +42,9 @@ func ExampleSoma() {
 	// 31
 	// 32
 }
+
+func BenchmarkSoma(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Soma(10, 20)
+	}
+}

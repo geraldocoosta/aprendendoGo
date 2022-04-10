@@ -4314,3 +4314,17 @@ gofmt: formata o código
 go vet: correctness → procura constructs suspeitos
 
 golint: suggestions → procura coding style ruim
+
+- Cap. 27 – Testes & Benchmarks – 5. Benchmarks
+
+Benchmarks nos permitem testar a velocidade ou performance do nosso código.
+
+- Na prática:
+  - Devem ser feitos no arquivo de teste, ou seja: `*_test.go`
+  - BET: Testes, Exemplos e Benchmarks
+  - Funciona com essa estrutura: `func BenchmarkFunc (b *testing.B) for i := 0; i < b.N; i++ { Soma(10, 20) }`
+  - Para rodar é usado os seguintes comandos:
+    - `go test -bench .` ← todos
+    - `go test -bench Func` ← somente Func
+
+Podemos usar para ter mais informação sobre testes, examples, benchmarks: `go help testflag`
