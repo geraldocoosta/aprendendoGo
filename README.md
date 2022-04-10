@@ -4149,8 +4149,10 @@ go doc é um comando na linha de comando
 
 basicamente mostra a documentação de um package ou função ou constante ou qualquer coisa
 
-- go help doc
-- go doc demonstra a documentação de um package, const, func, type, var, método, etc.
+go help doc
+
+go doc demonstra a documentação de um package, const, func, type, var, método, etc.
+
 - go doc aceita zero, um, ou dois argumentos:
   - zero: demonstra a documentação do package do diretório atual
   - um: toma argumentos nos padrões abaixo
@@ -4163,25 +4165,128 @@ basicamente mostra a documentação de um package ou função ou constante ou qu
 
 - Cap. 25 – Documentação – 3. godoc
 
-- godoc extrai e gera documentação de programas em Go. Funciona de duas maneiras:
-  - Sem o flag http é um comando normal, mostra a documentação no stdout e é isso aí. Pode conter o flag src, que mostra o código fonte.
-  - Com o flag http roda um servidor web local e mostra a documentação como página web.
-- Exemplo: godoc -http=:8080 → http://localhost:8080/
+godoc extrai e gera documentação de programas em Go. Funciona de duas maneiras:
+
+- Sem o flag http é um comando normal, mostra a documentação no stdout e é isso aí. Pode conter o flag src, que mostra o código fonte.
+- Com o flag http roda um servidor web local e mostra a documentação como página web.
+
+Exemplo: godoc -http=:8080 → http://localhost:8080/
 
 - Cap. 25 – Documentação – 5. Escrevendo Documentação
 
-- Documentação é uma parte extremamente importante de fazer com que software seja acessível e sustentável.
-- Documentação deve ser bem escrita e correta, mas tambem fácil de escrever e manter.
-- Deve ser acoplada com o código e evoluir junto com este. Quanto mais fácil for para os programadores criarem boa documentação... melhor fica pra todos os envolvidos.
+Documentação é uma parte extremamente importante de fazer com que software seja acessível e sustentável.
+
+Documentação deve ser bem escrita e correta, mas tambem fácil de escrever e manter.
+
+Deve ser acoplada com o código e evoluir junto com este. Quanto mais fácil for para os programadores criarem boa documentação... melhor fica pra todos os envolvidos.
+
 - godoc:
   - Analisa código fonte em Go, incluindo comentários, e gera documentação em HTML ou texto
   - O resultado é uma documentação firmemente atrelada ao código que documenta.
   - Por exemplo, na interface web de godoc pode-se navegar da documentação à implementação de um código com apenas um clique.
   - https://go.dev/blog/godoc
+
 - Na prática:
   - Para documentar um tipo, uma variável, uma constante, ou um pacote, escreva um comentário imediatamente antes de sua declaração, sem linhas em branco
   - Comece a frase com o nome do elemento. No caso de pacotes, a primeira linha aparece no "package list."
   - Caso esteja escrevendo bastante documentação, utilize um arquivo doc.go. Exemplo: package fmt.
-- A melhor parte dessa abordagem minimalista é que é super fácil de usar. Como resultado, muita coisa em Go, incluindo toda a standard library, já segue estas convenções.
-- Outro exemplo: errors package.
-- Código: https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/25_escrevendo-documentacao
+
+A melhor parte dessa abordagem minimalista é que é super fácil de usar. Como resultado, muita coisa em Go, incluindo toda a standard library, já segue estas convenções.
+
+Outro exemplo: errors package.
+
+Código: https://github.com/vkorbes/aprendago/tree/master/c%C3%B3digo/25_escrevendo-documentacao
+
+- Cap. 27 – Testes & Benchmarks – 1. Introdução
+
+- Testes devem:
+  - ficar num arquivo cuja terminação seja _test.go
+  - ficar na mesma package que o código a ser testado
+  - ficar em funções com nome "func TestNome(*testing.T)"
+
+Para rodar os testes é usado os comandos `go test` ou `go test -v`
+
+- Para falhas, utilizamos t.Error(), onde a maneira idiomática é algo do tipo "expected: x. got: y."
+
+- Cap. 27 – Testes & Benchmarks – 2. Testes em tabela
+
+Podemos escrever testes em série para testar variedades de situações.
+
+- Exemplo:
+  - struct test, fields: data []int, answer int
+  - tests := []test{[]int{}, int}
+  - range tests
+
+Exemplo em código
+
+```go
+type test struct {
+    data []int
+    answer int
+}
+
+func TestSomaEmTabela(t *testing.T) {
+    tests := []test{
+        {[]int{10, 20}, 20},
+        {[]int{1, 6}, 7},
+        {[]int{1, 2}, 3},
+    }
+
+    for _, test := range tests {
+        if result := soma(test.data[0], test.data[1]); result != test.answer {
+            t.Errorf("soma(%v) = %v, want %v", test.data, result, test.answer)
+        }
+    }
+}
+
+```
+
+- Cap. 27 – Testes & Benchmarks – 3. Testes como exemplos
+
+Outra maneira é fazer testes como exemplos.
+
+Estes exemplos são os mesmos que aparecem na documentação.
+
+Para exemplos o formato é "func ExampleFuncao()"
+
+Deve haver um comentário "// Output: resultado", que é o que será testado
+
+Para visualizar seu exemplo na documentação, fazemos o de sempre: `godoc -http :8080`
+
+Tanto para testes quanto para exemplos podemos utilizar: go test ./...
+
+Mais: https://blog.golang.org/examples
+
+```go
+type test struct {
+    data []int
+    answer int
+}
+
+func TestSomaEmTabela(t *testing.T) {
+    tests := []test{
+        {[]int{10, 20}, 20},
+        {[]int{1, 6}, 7},
+        {[]int{1, 2}, 3},
+    }
+
+    for _, test := range tests {
+        if result := soma(test.data[0], test.data[1]); result != test.answer {
+            t.Errorf("soma(%v) = %v, want %v", test.data, result, test.answer)
+        }
+    }
+}
+
+func ExampleSoma() {
+    result := soma(10, 20)
+    result := soma(10, 21)
+    result := soma(10, 22)
+    fmt.Println(result)
+    // Output: 30
+    // Output: 31
+    // Output: 32
+}
+
+```
+
+Esse example além de testar, também gera documentação, bem legal.
