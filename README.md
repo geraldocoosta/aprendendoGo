@@ -4258,33 +4258,49 @@ Tanto para testes quanto para exemplos podemos utilizar: go test ./...
 Mais: <https://blog.golang.org/examples>
 
 ```go
+package main
+
+import (
+    "fmt"
+    "github.com/stretchr/testify/assert"
+    "testing"
+)
+
+func TestSoma(t *testing.T) {
+    assert := assert.New(t)
+
+    soma := Soma(1, 2)
+    assert.Equal(soma, 3)
+
+}
+
 type test struct {
-    data []int
+    data   []int
     answer int
 }
 
 func TestSomaEmTabela(t *testing.T) {
     tests := []test{
-        {[]int{10, 20}, 20},
+        {[]int{10, 20}, 30},
         {[]int{1, 6}, 7},
         {[]int{1, 2}, 3},
     }
 
     for _, test := range tests {
-        if result := soma(test.data[0], test.data[1]); result != test.answer {
+        if result := Soma(test.data[0], test.data[1]); result != test.answer {
             t.Errorf("soma(%v) = %v, want %v", test.data, result, test.answer)
         }
     }
 }
 
 func ExampleSoma() {
-    result := soma(10, 20)
-    result := soma(10, 21)
-    result := soma(10, 22)
-    fmt.Println(result)
-    // Output: 30
-    // Output: 31
-    // Output: 32
+    fmt.Println(Soma(10, 20))
+    fmt.Println(Soma(10, 21))
+    fmt.Println(Soma(10, 22))
+    // Output:
+    // 30
+    // 31
+    // 32
 }
 
 ```
